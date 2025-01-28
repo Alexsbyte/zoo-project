@@ -12,6 +12,7 @@ const serverConfig = (app) =>{
     app.use(express.urlencoded({ extended: true }));
     app.use(cors({ credentials: true , origin: ['http://localhost:5173']}));
     app.use(verifyAccessToken)
+    app.use(removeHeader);
 }
 
 module.exports = serverConfig
