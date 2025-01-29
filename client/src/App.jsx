@@ -29,7 +29,7 @@ function App() {
         ,
         {
           path: '/auth/login',
-          element: <LoginPage />
+          element: <LoginPage setUser={setUser} />
         },
          {
         path: "/tariffs",

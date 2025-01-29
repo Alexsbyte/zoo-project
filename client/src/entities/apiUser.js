@@ -7,7 +7,15 @@ export default class apiUser {
       email,
       password,
     });
-    console.log('APIUSER>>>>>', result);
+    console.log('APIUSER-REG>>>>>', result);
+    return result;
+  }
+  static async login({ email, password }) {
+    const result = await axiosInstance.post('/auth/login', {
+      email,
+      password,
+    });
+    console.log('APIUSER-LOGIN>>>>>', result);
     return result;
   }
 }
