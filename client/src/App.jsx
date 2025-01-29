@@ -3,6 +3,7 @@ import Layout from './pages/Layout'
 import MainPage from './pages/MainPage/MainPage'
 import RegPage from './pages/RegPage/RegPage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import TariffsPage from "./pages/TariffsPage/TariffsPage";
 import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
@@ -30,6 +31,10 @@ function App() {
           path: '/auth/login',
           element: <LoginPage />
         },
+         {
+        path: "/tariffs",
+        element: <TariffsPage />,
+      },
         {
           path: '/animals',
           element: <AnimalsPage />
