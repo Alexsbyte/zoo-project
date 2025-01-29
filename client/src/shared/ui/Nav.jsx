@@ -1,7 +1,14 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import apiUser from '../../entities/apiUser'
 
-export default function Nav({user}) {
+export default function Nav({user, setUser}) {
+
+  async function handleLogout() {
+    apiUser.logout()
+    setUser(null)
+  }
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -34,7 +41,7 @@ export default function Nav({user}) {
               </>}
               
               {user.username && <>
-                <button className="button is-danger">
+                <button onClick={handleLogout} className="button is-danger">
                   <strong>Logout</strong>
                 </button>
                 <button className="button is-light">
