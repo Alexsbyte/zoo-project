@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-export default function Nav() {
+export default function Nav({user}) {
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -33,9 +33,12 @@ export default function Nav() {
               <button className="button is-danger">
                 <strong>Logout</strong>
               </button>
-              <button className="button is-light">
-                Admin
-              </button>
+              {user && 
+                <button className="button is-light">
+                  {user.username}
+                </button> 
+              }
+              
             </div>
           </div>
         </div>
