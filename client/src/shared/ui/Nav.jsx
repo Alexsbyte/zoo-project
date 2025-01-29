@@ -24,9 +24,9 @@ export default function Nav() {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <button className="button is-primary">
+              <NavLink to="/auth/reg" className="button is-primary">
                 <strong>Sign up</strong>
-              </button>
+              </NavLink>
               <button className="button is-info">
                 Log in
               </button>
