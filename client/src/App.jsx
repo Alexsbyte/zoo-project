@@ -5,6 +5,7 @@ import RegPage from './pages/RegPage/RegPage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 
 
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: '/auth/login',
         element: <LoginPage />
+      },
+      {
+        path: '/animals',
+        element: <AnimalsPage />
       }
     ]
   }
