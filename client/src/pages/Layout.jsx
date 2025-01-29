@@ -12,7 +12,7 @@ export default function Layout({user}) {
         minHeight: "100vh",
       }}
     >
-      <Nav user={user/>
+      <Nav user={user}/>
       <main style={{ flex: "1" }}>
         <Outlet />
       </main>
