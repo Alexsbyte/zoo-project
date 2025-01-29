@@ -30,18 +30,18 @@ axiosInstance.interceptors.response.use(
     //? запомнили информацию о прошлом запросе
     const prevRequest = error.config;
     //?  проверяем статус и проверка на первичность запроса, если попали внутрь, значит токен протух и нам нужна новая пара
-    if (error.response.status === 403 && !prevRequest.sent) {
-      //? делаем запрос на пару токенов
-      const response = await axiosInstance.get('/auth/refreshTokens');
-      //? достаем токен из ответа
-      setAccessToken(response.data.accessToken);
-      //? и создаем новый ключ и sent для проверки первичности
-      prevRequest.sent = true;
-      //? устанавливаем заголовки
-      prevRequest.headers.authorization = `Bearer ${accessToken}`;
-      //? делаем повторный запрос
-      return axiosInstance(prevRequest);
-    }
+    // if (error.response.status === 403 && !prevRequest.sent) {
+    //   //? делаем запрос на пару токенов
+    //   const response = await axiosInstance.get('/auth/refreshTokens');
+    //   //? достаем токен из ответа
+    //   setAccessToken(response.data.accessToken);
+    //   //? и создаем новый ключ и sent для проверки первичности
+    //   prevRequest.sent = true;
+    //   //? устанавливаем заголовки
+    //   prevRequest.headers.authorization = `Bearer ${accessToken}`;
+    //   //? делаем повторный запрос
+    //   return axiosInstance(prevRequest);
+    // }
     return Promise.reject(error);
   }
 );

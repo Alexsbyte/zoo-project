@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { axiosInstance } from "../../shared/lib/axiosInstance"
 
 export default function RegForm() {
 
@@ -19,7 +20,8 @@ export default function RegForm() {
 
   async function regHandler(e) {
     e.preventDefault()
-    console.log(formData)
+    const result = await axiosInstance.post('/auth/reg')
+    console.log(result);
     
   }
 
