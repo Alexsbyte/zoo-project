@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
+import AdminPage from './pages/AdminPage/AdminPage'
+
 
 function App() {
   const [user, setUser] = useState({})
