@@ -24,23 +24,26 @@ export default function Nav({user}) {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <NavLink to="/auth/reg" className="button is-primary">
-                <strong>Регистрация</strong>
-              </NavLink>
-              <NavLink to="/auth/login" className="button is-info">
-                Вход
-              </NavLink>
+              {!user.username && <>
+                <NavLink to="/auth/reg" className="button is-primary">
+                  <strong>Регистрация</strong>
+                </NavLink>
+                <NavLink to="/auth/login" className="button is-info">
+                  Вход
+                </NavLink>
+              </>}
               
-              {user.username && 
+              {user.username && <>
                 <button className="button is-danger">
                   <strong>Logout</strong>
                 </button>
-              }
-              {user.username && 
                 <button className="button is-light">
                   {user.username}
-                </button> 
+                </button>
+              </>
+                
               }
+            
             </div>
           </div>
         </div>
