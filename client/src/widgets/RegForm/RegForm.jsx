@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
-import { axiosInstance } from "../../shared/lib/axiosInstance"
+import { setAccessToken } from '../../shared/lib/axiosInstance'
+import apiUser from "../../entities/apiUser"
+import { useNavigate } from "react-router-dom"
 
-export default function RegForm() {
+export default function RegForm( { setUser }) {
 
   const [formData, setFormData] = useState({username: '', email: '', password: '', confPass: ''})
   const [isDisabled, setDisabled] = useState(true)
 
+  const navigete = useNavigate()
   useEffect(() => {
     const {username, email, password, confPass} = formData
     if(username !== '' &&
@@ -20,9 +23,12 @@ export default function RegForm() {
 
   async function regHandler(e) {
     e.preventDefault()
-    const result = await axiosInstance.post('/auth/reg')
-    console.log(result);
-    
+    const {username, email, password} = formData
+    const { data } = await apiUser.reg({ username, email, password })
+    console.log('REGFORM', data);
+    setAccessToken(data.data.accessToken)
+    setUser(data.data.user)
+    navigete('/')
   }
 
   return (

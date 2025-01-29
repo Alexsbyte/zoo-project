@@ -1,4 +1,4 @@
-import { useState , useEffect} from 'react'
+import { useState } from 'react'
 import Layout from './pages/Layout'
 import MainPage from './pages/MainPage/MainPage'
 import RegPage from './pages/RegPage/RegPage'
@@ -7,38 +7,34 @@ import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 
-
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <MainPage />
-      },
-      {
-        path: '/auth/reg',
-        element: <RegPage  />
-      }
-      ,
-      {
-        path: '/auth/login',
-        element: <LoginPage />
-      },
-      {
-        path: '/animals',
-        element: <AnimalsPage />
-      }
-    ]
-  }
-])
-
-
 function App() {
+  const [user, setUser] = useState({})
+
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Layout user={user}/>,
+      children: [
+        {
+          path: '/',
+          element: <MainPage />
+        },
+        {
+          path: '/auth/reg',
+          element: <RegPage setUser={setUser}  />
+        }
+        ,
+        {
+          path: '/auth/login',
+          element: <LoginPage />
+        },
+        {
+          path: '/animals',
+          element: <AnimalsPage />
+        }
+      ]
+    }
+  ])
 
   return <RouterProvider router={router}/>
 }
-
-export default App
