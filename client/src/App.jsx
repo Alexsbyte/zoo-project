@@ -11,6 +11,8 @@ import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
 import TaxesUpdatePage from './pages/TaxesUpdatePage/TaxesUpdatePage'
+import NotFound from './pages/NotFound/NotFound'
+
 
 
 function App() {
@@ -30,8 +32,9 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: "/",
-      element: <Layout user={user} setUser={setUser} />,
+      path: '/',
+      element: <Layout user={user} setUser={setUser}/>,
+      errorElement: <NotFound />,
       children: [
         {
           path: "/",
