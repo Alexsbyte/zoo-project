@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import apiUser from '../../entities/apiUser'
 import { setAccessToken } from '../lib/axiosInstance'
 
 export default function Nav({user, setUser, isLoaded}) {
+
+  const navigate = useNavigate()
   
   async function handleLogout(e) {
     e.preventDefault()
     const {data} = await apiUser.logout()
     setAccessToken('')
     setUser({})
+    navigate('/')
   }
 
   return (
