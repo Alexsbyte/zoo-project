@@ -1,23 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import apiUser from '../../entities/apiUser'
 import { setAccessToken } from '../lib/axiosInstance'
 
-export default function Nav({user, setUser}) {
+export default function Nav({user, setUser, isLoaded}) {
 
-  async function handlerRefresh() {
-    const {data} = await apiUser.refreshTokens()
-    console.log(data);
-    
-    setAccessToken(data.accessToken)
-    setUser(data.user)
-  }
+  
 
-  useEffect(() => {
-    handlerRefresh()
-  }, [])
+  // useEffect(() => {
+  //   setLoaded(true)
+  // }, [])
+  
 
-  async function handleLogout() {
+  async function handleLogout(e) {
+    e.preventDefault()
     const {data} = await apiUser.logout()
     setAccessToken('')
     setUser({})
@@ -34,18 +30,19 @@ export default function Nav({user, setUser}) {
         </NavLink>
 
         <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarDropdown">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-    </a>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
       </div>
 
       <div id="navbarDropdown" className="navbar-menu">
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {!user.username && <>
+
+              {(!user.username) && <>
                 <NavLink to="/auth/reg" className="button is-primary">
                   <strong>Регистрация</strong>
                 </NavLink>
@@ -54,32 +51,31 @@ export default function Nav({user, setUser}) {
                 </NavLink>
               </>}
               
-              {user.username && <>
-                
-                <span>Привет, {user.username}</span>
+              {user.username && 
+                <>
+                  
+                  <span>Привет, {user.username}</span>
 
-                <div className="navbar-item has-dropdown is-hoverable">
-                  <button className="button is-light">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#75FB4C"><path d="M690.88-270q25.88 0 44-19T753-333.88q0-25.88-18.12-44t-44-18.12Q665-396 646-377.88q-19 18.12-19 44T646-289q19 19 44.88 19Zm-1.38 125q33.5 0 60.5-14t46-40q-26-14-51.96-21t-54-7q-28.04 0-54.54 7T584-199q19 26 45.5 40t60 14ZM480-80q-138-32-229-156.5T160-522v-239l320-120 320 120v270q-14-7-30-12.5t-30-7.5v-208l-260-96-260 96v197q0 76 24.5 140T307-269.5q38 48.5 84 80.5t89 46q6 12 18 27t20 23q-9 5-19 7.5T480-80Zm212.5 0Q615-80 560-135.5T505-267q0-78.43 54.99-133.72Q614.98-456 693-456q77 0 132.5 55.28Q881-345.43 881-267q0 76-55.5 131.5T692.5-80ZM480-479Z"/></svg>
-                  </button>
+                  <div className="navbar-item has-dropdown is-hoverable">
+                    <button className="button is-light">
+                      <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 -960 960 960" width="48px" fill="#75FB4C"><path d="M690.88-270q25.88 0 44-19T753-333.88q0-25.88-18.12-44t-44-18.12Q665-396 646-377.88q-19 18.12-19 44T646-289q19 19 44.88 19Zm-1.38 125q33.5 0 60.5-14t46-40q-26-14-51.96-21t-54-7q-28.04 0-54.54 7T584-199q19 26 45.5 40t60 14ZM480-80q-138-32-229-156.5T160-522v-239l320-120 320 120v270q-14-7-30-12.5t-30-7.5v-208l-260-96-260 96v197q0 76 24.5 140T307-269.5q38 48.5 84 80.5t89 46q6 12 18 27t20 23q-9 5-19 7.5T480-80Zm212.5 0Q615-80 560-135.5T505-267q0-78.43 54.99-133.72Q614.98-456 693-456q77 0 132.5 55.28Q881-345.43 881-267q0 76-55.5 131.5T692.5-80ZM480-479Z"/></svg>
+                    </button>
 
-                  <div className="navbar-dropdown">
-                    <NavLink to='/edit/animals' className="navbar-item">
-                      Edit Animals
-                    </NavLink>
-                    <NavLink to="/edit/taxes" className="navbar-item">
-                      Edir Taxes
-                    </NavLink>
-                    
+                    <div className="navbar-dropdown">
+                      <NavLink to='/edit/animals' className="navbar-item">
+                        Edit Animals
+                      </NavLink>
+                      <NavLink to="/edit/taxes" className="navbar-item">
+                        Edir Taxes
+                      </NavLink>
+                      
+                    </div>
                   </div>
-                </div>
-                <button onClick={handleLogout} className="button is-danger">
-                  <strong>Logout</strong>
-                </button>
-                
-                
-              </>
-                
+                  <button onClick={handleLogout} className="button is-danger">
+                    <strong>Logout</strong>
+                  </button>
+                  
+                </>
               }
             
             </div>
