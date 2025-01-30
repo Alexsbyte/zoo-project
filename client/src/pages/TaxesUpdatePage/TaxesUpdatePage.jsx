@@ -77,7 +77,7 @@ export default function TaxesUpdatePage({ user }) {
           <div
             style={{
               padding: "20px",
-              backgroundColor: "rgba(44, 44, 44, 0.8)",
+              backgroundColor: "rgba(129, 253, 141, 0.8)",
               borderRadius: "8px",
               color: "white",
               width: "400px",
@@ -91,7 +91,7 @@ export default function TaxesUpdatePage({ user }) {
 
             <form onSubmit={handleSubmit} className="box">
               <div className="field">
-                <label className="label">Для взрослых (будни):</label>
+                <label className="label">Для взрослых (БУДНИ):</label>
                 <div className="control">
                   <input
                     className="input"
@@ -105,7 +105,7 @@ export default function TaxesUpdatePage({ user }) {
               </div>
 
               <div className="field">
-                <label className="label">Для детей (будни):</label>
+                <label className="label">Для детей (БУДНИ):</label>
                 <div className="control">
                   <input
                     className="input"
@@ -119,7 +119,7 @@ export default function TaxesUpdatePage({ user }) {
               </div>
 
               <div className="field">
-                <label className="label">Для взрослых (выходные):</label>
+                <label className="label">Для взрослых (ВЫХОДНЫЕ):</label>
                 <div className="control">
                   <input
                     className="input"
@@ -133,7 +133,7 @@ export default function TaxesUpdatePage({ user }) {
               </div>
 
               <div className="field">
-                <label className="label">Для детей (выходные):</label>
+                <label className="label">Для детей (ВЫХОДНЫЕ):</label>
                 <div className="control">
                   <input
                     className="input"

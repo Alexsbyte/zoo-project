@@ -45,14 +45,15 @@ export default function TariffsPage() {
         style={{
           backgroundColor: "rgba(44, 44, 44, 0.8)",
           borderRadius: "8px",
-          padding: "10px 20px",
+          padding: "20px",
           marginBottom: "20px",
           border: "1px solid #444",
           textAlign: "center",
-          marginTop: 20,
+          marginTop: 25,
+          marginRight: 50,
         }}
       >
-        <h1 className="title" style={{ color: "white" }}>
+        <h1 className="title" style={{ color: "white", fontSize: "2.5rem" }}>
           Тарифы
         </h1>
       </div>
@@ -75,6 +76,8 @@ export default function TariffsPage() {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                marginRight: 50,
+                marginTop: 25,
               }}
             >
               <table
@@ -91,6 +94,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       Для взрослых (будни):
@@ -100,6 +104,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       {tariff.Adult} р
@@ -111,6 +116,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       Для детей (будни):
@@ -120,6 +126,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       {tariff.Child} р
@@ -131,6 +138,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       Для взрослых (выходные):
@@ -140,6 +148,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       {tariff.weekendAdult} р
@@ -151,6 +160,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       Для детей (выходные):
@@ -160,6 +170,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
+                        fontSize: "1.2rem", 
                       }}
                     >
                       {tariff.weekendChild} р
@@ -171,6 +182,7 @@ export default function TariffsPage() {
           </div>
         ))}
       </div>
+
       <div
         style={{
           marginTop: "20px",
@@ -179,35 +191,57 @@ export default function TariffsPage() {
           borderRadius: "8px",
           color: "white",
           textAlign: "center",
+          marginRight: 50,
+          marginTop: 5,
         }}
       >
-        <h2 className="title is-5" style={{ color: "white" }}>
+        <h2
+          className="title is-5"
+          style={{ color: "white", fontSize: "1.5rem" }}
+        >
           Информация о билетах
         </h2>
-        <p style={{ color: "white" }}>детский билет (от 3 до 10 лет)</p>
-        <p style={{ color: "white" }}>до 3-х лет - бесплатно</p>
-        <p style={{ color: "white" }}>При покупке на сайте — скидка 10%</p>
-        <p style={{ color: "white" }}>Билет действует весь день</p>
+        <p style={{ color: "white", fontSize: "1.2rem" }}>
+          детский билет (от 3 до 10 лет)
+        </p>
+        <p style={{ color: "white", fontSize: "1.2rem" }}>
+          до 3-х лет - бесплатно
+        </p>
+        <p style={{ color: "white", fontSize: "1.2rem" }}>
+          При покупке на сайте — скидка 10%
+        </p>
+        <p style={{ color: "white", fontSize: "1.2rem" }}>
+          Билет действует весь день
+        </p>
 
-        <h3 className="title is-6" style={{ color: "white" }}>
+        <h3
+          className="title is-6"
+          style={{ color: "white", fontSize: "1.3rem" }}
+        >
           Льготы:
         </h3>
         <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
-          <li style={{ color: "white" }}>— Илье - вход бесплатно (навсегда)</li>
-          <li style={{ color: "white" }}>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
+            — Илье - вход бесплатно (навсегда)
+          </li>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
             — Кириллу - вход бесплатно (навсегда)
           </li>
-          <li style={{ color: "white" }}>— Инвалиды 1, 2 группы - бесплатно</li>
-          <li style={{ color: "white" }}>— Инвалиды 3 группы - 50% скидка</li>
-          <li style={{ color: "white" }}>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
+            — Инвалиды 1, 2 группы - бесплатно
+          </li>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
+            — Инвалиды 3 группы - 50% скидка
+          </li>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
             — Участники, ветераны боевых действий - бесплатно
           </li>
-          <li style={{ color: "white" }}>
+          <li style={{ color: "white", fontSize: "1.2rem" }}>
             — Многодетные семьи и пенсионеры - 20% скидка
           </li>
         </ul>
 
-        <p style={{ color: "white" }}>
+        <p style={{ color: "white", fontSize: "1.2rem" }}>
           Все льготы действуют при предоставлении документа на кассе.
         </p>
       </div>
