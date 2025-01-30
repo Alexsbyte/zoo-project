@@ -21,11 +21,8 @@ export default class apiUser {
   }
 
   static async logout() {
-    const result = await axiosInstance.post('/auth/login', {
-      email,
-      password,
-    });
-    console.log('APIUSER-LOGIN>>>>>', result);
+    const result = await axiosInstance.get('/auth/logout');
+    console.log('APIUSER-LOGOUT>>>>>', result);
     return result;
   }
 }
