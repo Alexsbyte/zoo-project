@@ -16,7 +16,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout user={user}/>,
+      element: <Layout user={user} setUser={setUser}/>,
       children: [
         {
           path: '/',
@@ -29,7 +29,7 @@ function App() {
         ,
         {
           path: '/auth/login',
-          element: <LoginPage />
+          element: <LoginPage setUser={setUser} />
         },
          {
         path: "/tariffs",
