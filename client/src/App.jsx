@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import Layout from './pages/Layout'
 import MainPage from './pages/MainPage/MainPage'
 import RegPage from './pages/RegPage/RegPage'
@@ -8,10 +8,27 @@ import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 import AdminPage from './pages/AdminPage/AdminPage'
+import AnimalEditPage from './pages/AnimalEditPage/AnimalEditPage'
+import apiAnimal from './entities/apiAnimal'
 
 
 function App() {
   const [user, setUser] = useState({})
+  const [toggle, setToggle] = useState(false)
+  const [animals , setAnimals] = useState([])
+
+   useEffect(()=>{
+        getAnimalsAndPhoto()
+    
+      },[toggle])
+        
+  const getAnimalsAndPhoto = async ()=> {
+    const {data} = await apiAnimal.getAnimalsAndPhotos()
+    const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
+    setAnimals(animalsArr) 
+    console.log(animalsArr);
+    
+  }
 
   const router = createBrowserRouter([
     {
@@ -20,7 +37,7 @@ function App() {
       children: [
         {
           path: '/',
-          element: <MainPage />
+          element: <MainPage setToggle={setToggle} />
         },
         {
           path: '/auth/reg',
@@ -37,7 +54,11 @@ function App() {
       },
         {
           path: '/animals',
-          element: <AnimalsPage />
+          element: <AnimalsPage animals={animals}/>
+        },
+        {
+          path: '/edit/animals',
+          element: <AnimalEditPage animals={animals} />
         }
       ]
     }

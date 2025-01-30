@@ -6,7 +6,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
-export default function AnimalCard({animal}) {
+export default function AnimalCard({animals}) {
 
   return (
     <div className="card">
@@ -18,10 +18,10 @@ export default function AnimalCard({animal}) {
         modules={[Navigation, Pagination]}
         className="swiper-container"
       >
-        {animal.photos.map((el) => (
+        {animals.photos.map((el) => (
           <SwiperSlide key={el.id}>
             <figure className="image is-4by3">
-              <img src={el.url} alt={`Фото ${animal.title}`} />
+              <img src={el.url} alt={`Фото ${animals.title}`} />
             </figure>
           </SwiperSlide>
         ))}
@@ -30,8 +30,9 @@ export default function AnimalCard({animal}) {
 
     {/* Контент карточки */}
     <div className="card-content">
-      <p className="title">{animal.title}</p>
-      <p className="content">{animal.description}</p>
+      <p className="title">{animals.title}</p>
+      <p className="content">{animals.description}</p>
+
     </div>
   </div>
   )

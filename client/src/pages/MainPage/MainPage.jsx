@@ -1,7 +1,12 @@
 import React from "react";
 import "bulma/css/bulma.css";
+import apiAnimal from '../../entities/apiAnimal'
+import { useEffect, useState } from 'react'
+export default function MainPage(setToggle) {
+ 
+  
 
-export default function MainPage() {
+
   return (
     <div
       style={{
@@ -30,7 +35,7 @@ export default function MainPage() {
         >
           Тарифы
         </a>
-        <a
+        <a onClick={()=> setToggle(prev=> !prev)}
           href="/animals"
           className="button is-info"
           style={{ margin: "10px" }}
