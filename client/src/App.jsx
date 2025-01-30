@@ -1,4 +1,6 @@
-import { useState , useEffect } from 'react'
+
+import { useState, useEffect } from 'react'
+
 import Layout from './pages/Layout'
 import MainPage from './pages/MainPage/MainPage'
 import RegPage from './pages/RegPage/RegPage'
@@ -7,9 +9,17 @@ import TariffsPage from "./pages/TariffsPage/TariffsPage";
 import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
+import apiUser from './entities/apiUser'
+import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
+
 import AnimalEditPage from './pages/AnimalEditPage/AnimalEditPage'
 import apiAnimal from './entities/apiAnimal'
+
+import TaxesUpdatePage from './pages/TaxesUpdatePage/TaxesUpdatePage'
+import NotFound from './pages/NotFound/NotFound'
+
+
 
 
 function App() {
@@ -30,39 +40,68 @@ function App() {
     
   }
 
+  async function handlerRefresh() {
+      const {data} = await apiUser.refreshTokens()
+      console.log(data);
+      
+      setAccessToken(data.accessToken)
+      setUser(data.user)
+    }
+  
+    useEffect(() => {
+      handlerRefresh()
+    }, [])
+
   const router = createBrowserRouter([
     {
       path: '/',
       element: <Layout user={user} setUser={setUser}/>,
+      errorElement: <NotFound />,
       children: [
         {
+
           path: '/',
           element: <MainPage setToggle={setToggle} />
+
         },
         {
-          path: '/auth/reg',
-          element: <RegPage setUser={setUser}  />
-        }
-        ,
-        {
-          path: '/auth/login',
-          element: <LoginPage setUser={setUser} />
+          path: "/auth/reg",
+          element: <RegPage setUser={setUser} />,
         },
-         {
-        path: "/tariffs",
-        element: <TariffsPage />,
-      },
         {
+          path: "/auth/login",
+          element: <LoginPage setUser={setUser} />,
+        },
+        {
+
           path: '/animals',
           element: <AnimalsPage animals={animals}/>
         },
         {
           path: '/edit/animals',
           element: <AnimalEditPage animals={animals} />
-        }
-      ]
-    }
-  ])
+        },
+
+
+          path: "/admin",
+          element: <AdminPage user={user} />,
+        },
+        {
+          path: "/taxes",
+          element: <TariffsPage />,
+        },
+        {
+          path: "/updateTariffs",
+          element: <TaxesUpdatePage user={user} />,
+        },
+        {
+          path: "/animals",
+          element: <AnimalsPage />,
+        },
+      ],
+    },
+  ]);
+
 
   return <RouterProvider router={router}/>
 }
