@@ -6,6 +6,6 @@ const uploadRouter =require('../api/uploadPhoto.routes')
 
 router.use('/taxes', taxesRouter);
 router.use('/animals', animalsRouter);
-router.use('./uploadPhotos' , uploadRouter)
+router.use('/upload' , uploadRouter)
 
 module.exports = router;

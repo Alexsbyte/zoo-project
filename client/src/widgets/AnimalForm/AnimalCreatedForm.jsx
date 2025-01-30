@@ -1,13 +1,63 @@
-import React from 'react'
-import { useState } from 'react';
-export default function AnimalCreatedEditedFrom({animals}) {
-  const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(animals.title);
-  const [description, setDescription] = useState(animals.description);
+
+import { useState, useRef } from 'react';
+import axios from 'axios';
+import { axiosInstance } from '../../shared/lib/axiosInstance';
+
+
+
+export default function AnimalCreatedEditedFrom() {
+
+  const [inputs , setInputs] = useState({title:'',description:''})
+  const [files, setFiles] = useState([]);
+  const fileInputRef = useRef(null);
+
+const handleReset = () => {
+    setFiles([]); // Очищаем список файлов
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Принудительно очищаем input[type="file"]
+    }
+  };
+
+const handleUpload = async (event) => {
+  event.preventDefault()
+  if (files.length === 0) {
+    alert('Выберите файлы!');
+    return;
+  }
+
+  const formData = new FormData();
+  files.forEach((file) => {
+    formData.append('photo', file);
+  });
+ formData.append('title',inputs.title)
+formData.append('description', inputs.description)
+console.log(inputs.title,inputs.description);
+
+
+  try {
+    const response = await axiosInstance.post('/api/upload',formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+  } catch (error) {
+    console.error("Error uploading data:", error);
+  }
+
+
+
+
+}
+
+
+const handleFileChange = (event) => {
+  setFiles((prevFiles)=>[...prevFiles,...event.target.files]); // Запоминаем файлы
+  console.log(files);
+  
+};
+
 
 
   return (
-    <form onSubmit={"handleSubmit"} className="box">
+    <form onSubmit={handleUpload} className="box" >
       <h2 className="title">Новое животное</h2>
       <div className="field">
         <label className="label">Название</label>
@@ -16,8 +66,8 @@ export default function AnimalCreatedEditedFrom({animals}) {
             className="input"
             type="text"
             placeholder="Введите название"
-            value={title}
-            onChange={({target}) => setTitle(target.value)}
+            value={inputs.title}
+            onChange={({target}) => setInputs(()=>({...inputs, title: target.value}))}
             required
           />
         </div>
@@ -29,43 +79,34 @@ export default function AnimalCreatedEditedFrom({animals}) {
           <textarea
             className="textarea"
             placeholder="Добавьте описание"
-            value={description}
-            onChange={({target}) => setDescription(target.value)}
+            value={inputs.description}
+            onChange={({target}) => setInputs(()=>({...inputs, description: target.value}))}
             required
           ></textarea>
         </div>
       </div>
 
-      <div className="field">
-        <label className="label">Фотографии</label>
-        <div className="file has-name is-boxed">
-          <label className="file-label">
-            <input className="file-input" type="file" multiple accept="image/*" onChange={"handlePhotoUpload"} />
-            <span className="file-cta">
-              <span className="file-icon">
-                📸
-              </span>
-              <span className="file-label">Выберите файлы…</span>
-            </span>
-          </label>
+
+<div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
+      <input type="file"  multiple onChange={handleFileChange} />
+      
+      {/* Отображение списка выбранных файлов */}
+      {files.length > 0 && (
+        <div style={{ marginTop: '10px', textAlign: 'left' }}>
+          <h4>Выбранные файлы:</h4>
+          <ul>
+            {files.map((file, index) => (
+              <li key={index}>
+                {file.name} ({(file.size / 1024).toFixed(2)} KB)
+              </li>
+            ))}
+          </ul>
+          <button onClick={handleReset} style={{ marginTop: '5px', background: 'red', color: 'white' }}>
+            Очистить
+          </button>
         </div>
-        {/* {animals.photos.length > 0 && (
-          <div className="mt-4">
-            <div className="columns is-multiline">
-              {photos.map((photo) => (
-                <div className="column is-one-quarter" key={"photo.id"}>
-                  <figure className="image is-128x128">
-                    <img src={"photo.url"} alt="Загруженное фото" />
-                  </figure>
-                  <button className="button is-danger is-small mt-2" onClick={() => "handleRemovePhoto"("photo.id")}>
-                    Удалить
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )} */}
-      </div>
+      )}
+    </div>
 
       <div className="field is-grouped">
         <div className="control">
@@ -74,7 +115,7 @@ export default function AnimalCreatedEditedFrom({animals}) {
           </button>
         </div>
         <div className="control">
-          <button className="button is-light" type="button" onClick={"onCancel"}>
+          <button className="button is-light" type="reset" onClick={()=>{setFiles([]), setInputs({title:'',description:''})}}>
             Очистить
           </button>
         </div>

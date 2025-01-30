@@ -5,9 +5,11 @@ const path = require('path');
 
 
 const storage = multer.diskStorage({
+  
+  
   destination (req, file, cb) {
     // здесь cb - колбек, который возвращает значение для св-ва destination
-    cb(null, 'public/images/'); // папка куда сохранять файлы
+    cb(null, path.resolve(__dirname,'../../public/images')); // папка куда сохранять файлы
   },
   filename (req, file, cb) {
     // здесь cb - колбек, который возвращает значение для св-ва filename
@@ -18,15 +20,19 @@ const storage = multer.diskStorage({
 
 
 const fileFilter = (req, file, cb) => {
+  console.log('<<<<<<<filter')
     const allowedTypes = /jpeg|jpg|png|gif/;
     const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
     const mimeType = allowedTypes.test(file.mimetype);
-  
+    console.log('<<<<<<<filter2')
     if (extName && mimeType) {
+      console.log('<<<<<<<filter3')
       return cb(null, true);
     }
+    console.log('<<<<<<<filter4')
     cb(new Error('Только изображения форматов JPEG, PNG, GIF!'));
   };
+
 const upload = multer({
     storage,
     limits: { fileSize: 5 * 1024 * 1024 },

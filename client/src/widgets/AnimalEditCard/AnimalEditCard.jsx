@@ -1,7 +1,8 @@
 import React from 'react'
 import { useState , useRef} from 'react';
-export default function AnimalEditCard({animals}) {
 
+export default function AnimalEditCard({animals}) {
+const url = 'http://localhost:3000'
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(animals.title);
   const [description, setDescription] = useState(animals.description);
@@ -50,7 +51,7 @@ export default function AnimalEditCard({animals}) {
                     onClick={() => handleRemovePhoto(photo.id)}
                   ></button>
                 )}
-                <img className="is-rounded" src={photo.url} alt={`Фото ${title}`} />
+                <img className="is-rounded" src={`${import.meta.env.VITE_IMAGES}/public${photo.url}`} alt={`Фото ${title}`} />
               </figure>
             </div>
           ))}
@@ -94,7 +95,7 @@ export default function AnimalEditCard({animals}) {
       </button>
       <button
         className={`button card-footer-item ${isEditing ? "is-light" : "is-danger"}`}
-        onClick={isEditing ? () => setIsEditing(false) : () => onDelete(animal.id)}
+        onClick={isEditing ? () => setIsEditing(false) : () => onDelete(animals.id)}
       >
         {isEditing ? "Отмена" : "Удалить"}
       </button>
