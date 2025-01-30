@@ -3,11 +3,18 @@ const bcrypt = require('bcrypt');
 const { Customer } = require('../db/models');
 const { generateTokens } = require('../utils/generateTokens');
 const jwtConfig = require('../config/jwtConfig');
+const UserValidator = require('../utils/userValidation');
 
 module.exports = class UserController {
   static async login(req, res) {
     try {
       const { email, password } = req.body;
+
+      const check = UserValidator.validateLogin({ email, password });
+
+      if (!check.isValid) {
+        return res.status(400).json(formatResponse(400, check.error));
+      }
 
       if (email && password) {
         const candidate = await Customer.findOne({

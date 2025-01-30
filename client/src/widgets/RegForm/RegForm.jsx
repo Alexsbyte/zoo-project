@@ -26,8 +26,8 @@ export default function RegForm( { setUser }) {
     const {username, email, password} = formData
     const { data } = await apiUser.reg({ username, email, password })
     console.log('REGFORM', data);
-    setAccessToken(data.data.accessToken)
-    setUser(data.data.user)
+    setAccessToken(data.accessToken)
+    setUser(data.user)
     navigete('/')
   }
 

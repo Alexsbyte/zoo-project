@@ -5,7 +5,7 @@ class UserValidator {
     if (!name || typeof name !== 'string' || name.trim() === '') {
       return {
         isValid: false,
-        error: 'name is required and must be a non-empty string.',
+        error: 'Поле не должно быть пустым или не верный формат',
       };
     }
 
@@ -51,7 +51,7 @@ class UserValidator {
     ) {
       return {
         isValid: false,
-        error: 'Email is required and must be a valid email address.',
+        error: 'Поле не должно быть пустым или не верный формат',
       };
     }
 

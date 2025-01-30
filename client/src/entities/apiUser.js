@@ -12,15 +12,21 @@ export default class apiUser {
       email,
       password,
     });
-    return result;
+    return result.data;
   }
 
   static async login({ email, password }) {
+    // try {
     const result = await axiosInstance.post('/auth/login', {
       email,
       password,
     });
-    return result;
+    // console.log(result);
+    return result.data;
+    // } catch (error) {
+    //   console.log('APIUSER CATCH', error.response);
+    //   return error;
+    // }
   }
 
   static async logout() {
