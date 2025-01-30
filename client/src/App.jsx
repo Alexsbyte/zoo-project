@@ -45,6 +45,10 @@ function App() {
           path: '/auth/login',
           element: <LoginPage setUser={setUser} />
         },
+        {
+          path: '/admin',
+          element: <AdminPage />
+        },
          {
         path: "/tariffs",
         element: <TariffsPage />,
