@@ -8,7 +8,7 @@ import LoginPage from './pages/LoginPage/LoginPage'
 import TariffsPage from "./pages/TariffsPage/TariffsPage";
 import 'bulma/css/bulma.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
+import AnimalsPage from '../src/pages/AnimalsPage/AnimalsPage'
 import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
@@ -56,7 +56,7 @@ function App() {
     {
       path: '/',
       element: <Layout user={user} setUser={setUser}/>,
-      errorElement: <NotFound />,
+      // errorElement: <NotFound />,
       children: [
         {
 
@@ -73,7 +73,6 @@ function App() {
           element: <LoginPage setUser={setUser} />,
         },
         {
-
           path: '/animals',
           element: <AnimalsPage animals={animals}/>
         },
@@ -81,8 +80,7 @@ function App() {
           path: '/edit/animals',
           element: <AnimalEditPage animals={animals} />
         },
-
-
+        {
           path: "/admin",
           element: <AdminPage user={user} />,
         },
@@ -93,13 +91,8 @@ function App() {
         {
           path: "/updateTariffs",
           element: <TaxesUpdatePage user={user} />,
-        },
-        {
-          path: "/animals",
-          element: <AnimalsPage />,
-        },
-      ],
-    },
+        },]}
+
   ]);
 
 
