@@ -19,7 +19,7 @@ export default function AdminPage() {
       <div className="columns is-centered">
         <div className="column ">
           <Link 
-            to="/edit-tariffs" 
+            to="/edit-taxes" 
             className="button is-primary is-large is-fullwidth is-size-4 has-text-centered has-text-white"
             style={{ whiteSpace: 'nowrap' }}
           >

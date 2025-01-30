@@ -32,7 +32,7 @@ function App() {
           element: <LoginPage setUser={setUser} />
         },
          {
-        path: "/tariffs",
+        path: "/taxes",
         element: <TariffsPage />,
       },
         {
