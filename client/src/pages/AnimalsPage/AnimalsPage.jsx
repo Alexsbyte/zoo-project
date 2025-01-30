@@ -5,7 +5,6 @@ import apiAnimal from '../../entities/apiAnimal'
 
 export default function AnimalsPage() {
 const [animals , setAnimals] = useState([])
-const [animalsPhoto , setPhoto] = useState([])
 
   useEffect(()=>{
     getAnimalsAndPhoto()
@@ -17,8 +16,7 @@ const getAnimalsAndPhoto = async ()=> {
   // const animalsPhotos =  await data.data.map(el => el.Photos)
   const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
   setAnimals(animalsArr)
-  // setPhoto(animalsPhotos)
-  // console.log(animalsPhotos);
+
   
   
   
