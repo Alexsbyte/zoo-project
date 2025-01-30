@@ -1,28 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { axiosInstance } from "../../shared/lib/axiosInstance"; 
 
 export default function TariffsPage() {
-  const mockData = [
-    {
-      id: 1,
-      title: "Тариф будние",
-      weekday: {
-        adult: "1000р",
-      },
-      weekend: {
-        child: "700р",
-      },
-    },
-    {
-      id: 2,
-      title: "Тариф выходные",
-      weekday: {
-        adult: "1200р",
-      },
-      weekend: {
-        child: "900р",
-      },
-    },
-  ];
+  const [tariffs, setTariffs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchTariffs = async () => {
+      try {
+        const response = await axiosInstance.get("/api/taxes");
+        console.log("Ответ API:", response.data); 
+        setTariffs(response.data);
+      } catch (error) {
+        console.error(error);
+        setError("Ошибка при загрузке тарифов");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTariffs();
+  }, []);
+
+  if (loading) return <div>Загрузка...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div
@@ -55,39 +57,45 @@ export default function TariffsPage() {
       </div>
 
       <div className="columns is-multiline">
-        {mockData.map((tariff) => (
-          <div key={tariff.id} className="column is-half">
-            <div
-              className="card"
-              style={{
-                backgroundColor: "#2c2c2c",
-                color: "white",
-                border: "1px solid #444",
-                borderRadius: "8px",
-                padding: "20px",
-              }}
-            >
-              <div className="card-content">
-                <h2 className="title is-4" style={{ color: "white" }}>
-                  {tariff.title}
-                </h2>
-                <p className="subtitle is-6" style={{ color: "white" }}>
-                  {tariff.price}
-                </p>
-
-                <div className="content">
-                  <ul style={{ color: "white", paddingLeft: "20px" }}>
-                    <li>Для взрослых: {tariff.weekday.adult}</li>
-                  </ul>
-                  <ul style={{ color: "white", paddingLeft: "20px" }}>
-                    <li>Для детей: {tariff.weekend.child}</li>
-                  </ul>
+        {Array.isArray(tariffs) && tariffs.length > 0 ? (
+          tariffs.map((tariff) => (
+            <div key={tariff.id} className="column is-half">
+              <div
+                className="card"
+                style={{
+                  backgroundColor: "#2c2c2c",
+                  color: "white",
+                  border: "1px solid #444",
+                  borderRadius: "8px",
+                  padding: "20px",
+                }}
+              >
+                <div className="card-content">
+                  <h2 className="title is-4" style={{ color: "white" }}>
+                  </h2>
+                  <p className="subtitle is-6" style={{ color: "white" }}>
+                    Для взрослых (будни):{" "}
+                    {tariff.dataValues?.Adult || "недоступно"} р
+                  </p>
+                  <p className="subtitle is-6" style={{ color: "white" }}>
+                    Для детей (будни):{" "}
+                    {tariff.dataValues?.Child || "недоступно"} р
+                  </p>
+                  <p className="subtitle is-6" style={{ color: "white" }}>
+                    Для взрослых (выходные):{" "}
+                    {tariff.dataValues?.weekendAdult || "недоступно"} р
+                  </p>
+                  <p className="subtitle is-6" style={{ color: "white" }}>
+                    Для детей (выходные):{" "}
+                    {tariff.dataValues?.weekendChild || "недоступно"} р
+                  </p>
                 </div>
               </div>
-              <footer className="card-footer"></footer>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <div>Нет доступных тарифов.</div>
+        )}
       </div>
 
       <div
