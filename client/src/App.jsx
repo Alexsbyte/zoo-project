@@ -10,6 +10,7 @@ import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
+import TaxesUpdatePage from './pages/TaxesUpdatePage/TaxesUpdatePage'
 
 
 function App() {
@@ -29,37 +30,40 @@ function App() {
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <Layout user={user} setUser={setUser}/>,
+      path: "/",
+      element: <Layout user={user} setUser={setUser} />,
       children: [
         {
-          path: '/',
-          element: <MainPage />
+          path: "/",
+          element: <MainPage />,
         },
         {
-          path: '/auth/reg',
-          element: <RegPage setUser={setUser}  />
-        }
-        ,
-        {
-          path: '/auth/login',
-          element: <LoginPage setUser={setUser} />
+          path: "/auth/reg",
+          element: <RegPage setUser={setUser} />,
         },
         {
-          path: '/admin',
-          element: <AdminPage user={user} />
+          path: "/auth/login",
+          element: <LoginPage setUser={setUser} />,
         },
-         {
-        path: "/tariffs",
-        element: <TariffsPage />,
-      },
         {
-          path: '/animals',
-          element: <AnimalsPage />
-        }
-      ]
-    }
-  ])
+          path: "/admin",
+          element: <AdminPage user={user} />,
+        },
+        {
+          path: "/taxes",
+          element: <TariffsPage />,
+        },
+        {
+          path: "/updateTariffs",
+          element: <TaxesUpdatePage user={user} />,
+        },
+        {
+          path: "/animals",
+          element: <AnimalsPage />,
+        },
+      ],
+    },
+  ]);
 
   return <RouterProvider router={router}/>
 }

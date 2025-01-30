@@ -31,13 +31,16 @@ export default function MainPage() {
           marginBottom: "20px",
         }}
       >
-        <h1 className="title" style={{ color: "white" ,fontSize: "2rem", margin: 0 }}>
+        <h1
+          className="title"
+          style={{ color: "white", fontSize: "2rem", margin: 0 }}
+        >
           Добро пожаловать на наш сайт!
         </h1>
       </div>
       <div style={{ margin: "20px 0" }}>
         <a
-          href="/tariffs"
+          href="/taxes"
           className={`button ${isLightTheme ? "is-primary" : "is-light"}`}
           style={{ margin: "10px" }}
         >
