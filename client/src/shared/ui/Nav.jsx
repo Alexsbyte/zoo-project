@@ -1,14 +1,24 @@
-import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import apiUser from '../../entities/apiUser'
 import { setAccessToken } from '../lib/axiosInstance'
 
 export default function Nav({user, setUser}) {
 
-  const navigate = useNavigate()
+  async function handlerRefresh() {
+    const {data} = await apiUser.refreshTokens()
+    console.log(data);
+    
+    setAccessToken(data.accessToken)
+    setUser(data.user)
+  }
+
+  useEffect(() => {
+    handlerRefresh()
+  }, [])
 
   async function handleLogout() {
-    const {data} = apiUser.logout()
+    const {data} = await apiUser.logout()
     setAccessToken('')
     setUser({})
   }
