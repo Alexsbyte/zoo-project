@@ -22,7 +22,6 @@ export default function LoginForm( { setUser }) {
     e.preventDefault()
     const {email, password} = formData
     const { data } = await apiUser.login({ email, password })
-    console.log('LOGINFORM', data);
     setAccessToken(data.data.accessToken)
     setUser(data.data.user)
     navigete('/')

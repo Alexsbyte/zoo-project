@@ -18,8 +18,6 @@ function App() {
 
   async function handlerRefresh() {
       const {data} = await apiUser.refreshTokens()
-      console.log(data);
-      
       setAccessToken(data.accessToken)
       setUser(data.user)
     }
