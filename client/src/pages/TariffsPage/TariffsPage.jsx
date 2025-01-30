@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../../shared/lib/axiosInstance"; 
+import { axiosInstance } from "../../shared/lib/axiosInstance";
 
 export default function TariffsPage() {
   const [tariffs, setTariffs] = useState([]);
@@ -10,7 +10,7 @@ export default function TariffsPage() {
     const fetchTariffs = async () => {
       try {
         const response = await axiosInstance.get("/api/taxes");
-        console.log("Ответ API:", response.data); 
+        
         setTariffs(response.data);
       } catch (error) {
         console.error(error);
@@ -23,8 +23,8 @@ export default function TariffsPage() {
     fetchTariffs();
   }, []);
 
-  if (loading) return <div>Загрузка...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading) return <div style={{ color: "white" }}>Загрузка...</div>;
+  if (error) return <div style={{ color: "white" }}>{error}</div>;
 
   return (
     <div
@@ -44,58 +44,132 @@ export default function TariffsPage() {
     >
       <div
         style={{
-          backgroundColor: "#2c2c2c",
+          backgroundColor: "rgba(44, 44, 44, 0.8)",
           borderRadius: "8px",
           padding: "10px 20px",
           marginBottom: "20px",
           border: "1px solid #444",
+          textAlign: "center",
         }}
       >
-        <h1 className="title has-text-centered" style={{ color: "white" }}>
+        <h1 className="title" style={{ color: "white" }}>
           Тарифы
         </h1>
       </div>
 
-      <div className="columns is-multiline">
-        {Array.isArray(tariffs) && tariffs.length > 0 ? (
-          tariffs.map((tariff) => (
-            <div key={tariff.id} className="column is-half">
-              <div
-                className="card"
+      <div
+        className="columns is-multiline"
+        style={{ justifyContent: "center" }}
+      >
+        {tariffs.map((tariff) => (
+          <div key={tariff.id} className="column is-half">
+            <div
+              className="card"
+              style={{
+                backgroundColor: "rgba(44, 44, 44, 0.8)",
+                color: "white",
+                border: "1px solid #444",
+                borderRadius: "8px",
+                padding: "20px",
+                marginBottom: "20px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <table
                 style={{
-                  backgroundColor: "#2c2c2c",
-                  color: "white",
-                  border: "1px solid #444",
-                  borderRadius: "8px",
-                  padding: "20px",
+                  width: "100%",
+                  textAlign: "center",
+                  tableLayout: "fixed",
                 }}
               >
-                <div className="card-content">
-                  <h2 className="title is-4" style={{ color: "white" }}>
-                  </h2>
-                  <p className="subtitle is-6" style={{ color: "white" }}>
-                    Для взрослых (будни):{" "}
-                    {tariff.dataValues?.Adult || "недоступно"} р
-                  </p>
-                  <p className="subtitle is-6" style={{ color: "white" }}>
-                    Для детей (будни):{" "}
-                    {tariff.dataValues?.Child || "недоступно"} р
-                  </p>
-                  <p className="subtitle is-6" style={{ color: "white" }}>
-                    Для взрослых (выходные):{" "}
-                    {tariff.dataValues?.weekendAdult || "недоступно"} р
-                  </p>
-                  <p className="subtitle is-6" style={{ color: "white" }}>
-                    Для детей (выходные):{" "}
-                    {tariff.dataValues?.weekendChild || "недоступно"} р
-                  </p>
-                </div>
-              </div>
+                <tbody>
+                  <tr>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      Для взрослых (будни):
+                    </td>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      {tariff.Adult} р
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      Для детей (будни):
+                    </td>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      {tariff.Child} р
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      Для взрослых (выходные):
+                    </td>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      {tariff.weekendAdult} р
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      Для детей (выходные):
+                    </td>
+                    <td
+                      style={{
+                        width: "50%",
+                        wordWrap: "break-word",
+                        color: "white",
+                      }}
+                    >
+                      {tariff.weekendChild} р
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-          ))
-        ) : (
-          <div>Нет доступных тарифов.</div>
-        )}
+          </div>
+        ))}
       </div>
 
       <div
@@ -105,6 +179,7 @@ export default function TariffsPage() {
           backgroundColor: "rgba(44, 44, 44, 0.8)",
           borderRadius: "8px",
           color: "white",
+          textAlign: "center",
         }}
       >
         <h2 className="title is-5" style={{ color: "white" }}>
@@ -118,7 +193,11 @@ export default function TariffsPage() {
         <h3 className="title is-6" style={{ color: "white" }}>
           Льготы:
         </h3>
-        <ul>
+        <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+          <li style={{ color: "white" }}>— Илье - вход бесплатно (навсегда)</li>
+          <li style={{ color: "white" }}>
+            — Кириллу - вход бесплатно (навсегда)
+          </li>
           <li style={{ color: "white" }}>— Инвалиды 1, 2 группы - бесплатно</li>
           <li style={{ color: "white" }}>— Инвалиды 3 группы - 50% скидка</li>
           <li style={{ color: "white" }}>
@@ -128,6 +207,7 @@ export default function TariffsPage() {
             — Многодетные семьи и пенсионеры - 20% скидка
           </li>
         </ul>
+
         <p style={{ color: "white" }}>
           Все льготы действуют при предоставлении документа на кассе.
         </p>

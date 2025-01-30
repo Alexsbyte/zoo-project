@@ -3,7 +3,6 @@ const taxService = require('../service/taxService');
 exports.getAllTaxes = async (req, res) => {
   try {
     const taxes = await taxService.getAllTaxes();
-    console.log('Тарифы:', taxes); 
     res.json(taxes);
   } catch (error) {
     console.error(error);
@@ -23,14 +22,12 @@ exports.createTax = async (req, res) => {
     });
     res.status(201).json(newTax);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Ошибка при создании тарифа' });
   }
 };
 
 exports.updateTax = async (req, res) => {
   const { id } = req.params;
-
   const { Adult, Child, weekendAdult, weekendChild } = req.body;
 
   try {
@@ -49,7 +46,6 @@ exports.updateTax = async (req, res) => {
 
     res.json(tax);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Ошибка при обновлении тарифа' });
   }
 };
@@ -68,7 +64,6 @@ exports.deleteTax = async (req, res) => {
 
     res.status(204).send();
   } catch (error) {
-    console.error(error);
     res.status(500).json({ error: 'Ошибка при удалении тарифа' });
   }
 };

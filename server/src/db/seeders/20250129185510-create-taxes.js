@@ -13,14 +13,6 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
-        {
-          Adult: 800,
-          Child: 600,
-          weekendAdult: 1000,
-          weekendChild: 700,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
       ],
       {},
     );

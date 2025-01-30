@@ -25,21 +25,19 @@ export default function MainPage() {
           border: `2px solid ${isLightTheme ? "black" : "white"}`,
           borderRadius: "10px",
           padding: "20px",
-          backgroundColor: isLightTheme
-            ? "rgba(255, 255, 255, 0.8)"
-            : "rgba(0, 0, 0, 0.7)",
-          color: isLightTheme ? "black" : "white",
+          backgroundColor: "rgba(44, 44, 44, 0.8)",
+          color: "white",
           textAlign: "center",
           marginBottom: "20px",
         }}
       >
-        <h1 className="title" style={{ fontSize: "2rem", margin: 0 }}>
+        <h1 className="title" style={{ color: "white" ,fontSize: "2rem", margin: 0 }}>
           Добро пожаловать на наш сайт!
         </h1>
       </div>
       <div style={{ margin: "20px 0" }}>
         <a
-          href="/taxes"
+          href="/tariffs"
           className={`button ${isLightTheme ? "is-primary" : "is-light"}`}
           style={{ margin: "10px" }}
         >
