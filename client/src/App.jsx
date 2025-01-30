@@ -47,7 +47,7 @@ function App() {
         },
         {
           path: '/admin',
-          element: <AdminPage />
+          element: <AdminPage user={user} />
         },
          {
         path: "/tariffs",
