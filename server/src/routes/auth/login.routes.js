@@ -9,7 +9,6 @@ const router = require('express').Router();
 router.post('/', async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email);
 
     if (email && password) {
       const candidate = await Customer.findOne({
@@ -17,23 +16,32 @@ router.post('/', async (req, res) => {
           email,
         },
       });
+
+      if (!candidate) {
+        return res
+          .status(400)
+          .json(formatResponse(400, 'Неверное имя пользователя или пароль'));
+      }
+
       const user = candidate.get({ plain: true });
 
-      const isMatch = bcrypt.compare(password, user.password);
+      const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        res.status(400).json(formatResponse(400, 'Неверное имя пользователя или пароль'));
+        return res
+          .status(400)
+          .json(formatResponse(400, 'Неверное имя пользователя или пароль'));
       }
 
       const { accessToken, refreshToken } = generateTokens(user);
 
       res
-        .status(201)
+        .status(200)
         .cookie(jwtConfig.refresh.type, refreshToken, {
           maxAge: jwtConfig.refresh.expiresIn,
           httpOnly: true,
         })
-        .json(formatResponse(201, 'login success', { accessToken, user }));
+        .json(formatResponse(200, 'login success', { accessToken, user }));
     } else {
       res.status(400).json(formatResponse(400, 'Нужно заполнить все поля'));
     }
