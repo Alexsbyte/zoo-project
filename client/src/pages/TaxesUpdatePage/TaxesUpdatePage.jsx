@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import apiTaxes from "../../entities/apiTaxes";
 
-export default function TaxesUpdatePage({user}) {
+export default function TaxesUpdatePage({ user }) {
   const navigate = useNavigate();
 
   const [tariff, setTariff] = useState({
@@ -62,7 +62,7 @@ export default function TaxesUpdatePage({user}) {
 
   return (
     <>
-      {(user.roleId === 1) ? (
+      {user.roleId === 1 ? (
         <div
           style={{
             backgroundImage: `url('https://a.d-cd.net/d95c9a5s-1920.jpg')`,
@@ -155,7 +155,7 @@ export default function TaxesUpdatePage({user}) {
       ) : (
         <div
           style={{
-            backgroundImage: `url('https://img.freepik.com/free-vector/zoo-concept-illustration_114360-6577.jpg')`,
+            backgroundImage: `url('https://images.wallpaperscraft.com/image/single/beaver_tail_waving_76276_1280x720.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "100vh",
@@ -167,21 +167,41 @@ export default function TaxesUpdatePage({user}) {
           }}
         >
           <h1
-            className="title"
-            style={{ fontSize: "3rem", margin: "20px 0", color: "orange" }}
+            style={{
+              fontSize: "15rem",
+              marginBottom: "20px",
+              color: "orange",
+              marginRight: "20%",
+            }}
           >
-            Доступ запрещен!
+            404
+          </h1>
+          <h1
+            className="title"
+            style={{
+              fontSize: "3rem",
+              marginBottom: "20px",
+              color: "orange",
+              marginRight: "20%",
+            }}
+          >
+            Здесь только Бобэр, курва!
           </h1>
           <p
             className="subtitle"
-            style={{ fontSize: "1.5rem", margin: "20px 0" }}
+            style={{
+              fontSize: "1.5rem",
+              marginBottom: "20px",
+              color: "orange",
+              marginRight: "20%",
+            }}
           >
             У вас нет прав доступа к этой странице.
           </p>
           <NavLink
             to="/"
             className="button is-warning"
-            style={{ marginTop: "20px" }}
+            style={{ marginTop: "20px", marginRight: "20%" }}
           >
             На главную
           </NavLink>
