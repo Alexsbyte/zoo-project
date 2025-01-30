@@ -17,15 +17,15 @@ const getAnimalsAndPhoto = async ()=> {
   // const animalsPhotos =  await data.data.map(el => el.Photos)
   const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
   setAnimals(animalsArr)
-  setPhoto(animalsPhotos)
-  console.log(animalsPhotos);
+  // setPhoto(animalsPhotos)
+  // console.log(animalsPhotos);
   
   
   
 }
   return (<>
     <div className="container mt-5">
-        <h1 className="title has-text-centered">Animals</h1>
+        <h1 className="title has-text-centered">Животные нашего зоопарка</h1>
         <div className="columns is-multiline">
           {animals.map((animal) => (
             <div key={animal.id} className="column is-half">
