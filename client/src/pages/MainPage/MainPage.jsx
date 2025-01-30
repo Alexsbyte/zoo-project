@@ -4,7 +4,7 @@ import apiAnimal from '../../entities/apiAnimal'
 import { useEffect, useState } from 'react'
 export default function MainPage(setToggle) {
  
-export default function MainPage() {
+
   const isLightTheme = true;
 
   return (
@@ -59,5 +59,5 @@ export default function MainPage() {
         </a>
       </div>
     </div>
-  );
-}
+  );}
+
