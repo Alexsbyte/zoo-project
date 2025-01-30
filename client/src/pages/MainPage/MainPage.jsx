@@ -1,6 +1,9 @@
 import React from "react";
 import "bulma/css/bulma.css";
-
+import apiAnimal from '../../entities/apiAnimal'
+import { useEffect, useState } from 'react'
+export default function MainPage(setToggle) {
+ 
 export default function MainPage() {
   const isLightTheme = true;
 
@@ -47,7 +50,7 @@ export default function MainPage() {
         >
           Тарифы
         </a>
-        <a
+        <a onClick={()=> setToggle(prev=> !prev)}
           href="/animals"
           className={`button ${isLightTheme ? "is-info" : "is-light"}`}
           style={{ margin: "10px" }}

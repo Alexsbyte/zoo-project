@@ -1,4 +1,6 @@
+
 import { useState, useEffect } from 'react'
+
 import Layout from './pages/Layout'
 import MainPage from './pages/MainPage/MainPage'
 import RegPage from './pages/RegPage/RegPage'
@@ -10,13 +12,33 @@ import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
+
+import AnimalEditPage from './pages/AnimalEditPage/AnimalEditPage'
+import apiAnimal from './entities/apiAnimal'
+
 import TaxesUpdatePage from './pages/TaxesUpdatePage/TaxesUpdatePage'
 import NotFound from './pages/NotFound/NotFound'
 
 
 
+
 function App() {
   const [user, setUser] = useState({})
+  const [toggle, setToggle] = useState(false)
+  const [animals , setAnimals] = useState([])
+
+   useEffect(()=>{
+        getAnimalsAndPhoto()
+    
+      },[toggle])
+        
+  const getAnimalsAndPhoto = async ()=> {
+    const {data} = await apiAnimal.getAnimalsAndPhotos()
+    const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
+    setAnimals(animalsArr) 
+    console.log(animalsArr);
+    
+  }
 
   async function handlerRefresh() {
       const {data} = await apiUser.refreshTokens()
@@ -37,8 +59,10 @@ function App() {
       errorElement: <NotFound />,
       children: [
         {
-          path: "/",
-          element: <MainPage />,
+
+          path: '/',
+          element: <MainPage setToggle={setToggle} />
+
         },
         {
           path: "/auth/reg",
@@ -49,6 +73,16 @@ function App() {
           element: <LoginPage setUser={setUser} />,
         },
         {
+
+          path: '/animals',
+          element: <AnimalsPage animals={animals}/>
+        },
+        {
+          path: '/edit/animals',
+          element: <AnimalEditPage animals={animals} />
+        },
+
+
           path: "/admin",
           element: <AdminPage user={user} />,
         },
@@ -67,6 +101,7 @@ function App() {
       ],
     },
   ]);
+
 
   return <RouterProvider router={router}/>
 }
