@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
           maxAge: jwtConfig.refresh.expiresIn,
           httpOnly: true,
         })
-        .json(formatResponse(201, 'UserCreated', { accessToken, user }));
+        .json(formatResponse(201, 'login success', { accessToken, user }));
     } else {
       res.status(400).json(formatResponse(400, 'Нужно заполнить все поля'));
     }
