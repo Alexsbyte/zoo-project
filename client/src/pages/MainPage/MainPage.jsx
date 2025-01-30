@@ -7,7 +7,7 @@ export default function MainPage() {
   return (
     <div
       style={{
-        backgroundImage: `url('https://sun9-18.userapi.com/impf/N5eeYWnxlW_Wti6x6AZZ2dSMHbpNzRUrCDGwUA/crQ5_1DZOyw.jpg?size=1920x768&quality=95&crop=17,0,1885,753&sign=dd727d4689bfc3bfa1643a616f20cd47&type=cover_group')`,
+        backgroundImage: `url('https://cdn.culture.ru/images/32079095-7c67-5856-a6d3-13c3021dcbf7')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -29,6 +29,7 @@ export default function MainPage() {
           color: "white",
           textAlign: "center",
           marginBottom: "20px",
+          marginTop: 20,
         }}
       >
         <h1
