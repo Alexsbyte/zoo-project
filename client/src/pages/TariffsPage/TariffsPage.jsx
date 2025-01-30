@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { axiosInstance } from "../../shared/lib/axiosInstance";
+import apiTaxes from "../../entities/apiTaxes";
 
 export default function TariffsPage() {
-  const [tariffs, setTariffs] = useState([]);
+  const [taxes, setTariffs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTariffs = async () => {
       try {
-        const response = await axiosInstance.get("/api/taxes");
-        
-        setTariffs(response.data);
+        const data = await apiTaxes.getAllTaxes();
+        setTariffs(data);
       } catch (error) {
         console.error(error);
         setError("Ошибка при загрузке тарифов");
@@ -29,7 +28,7 @@ export default function TariffsPage() {
   return (
     <div
       style={{
-        backgroundImage: `url('https://aws-tiqets-cdn.imgix.net/images/content/3dd2e3de44474186a1e480190e53a232.jpg?auto=format&fit=crop&ixlib=python-3.2.1&q=70&s=e3417bb6c35d91c841bf7a92cdb215e2')`,
+        backgroundImage: `url('https://i.pinimg.com/originals/24/11/31/241131b8c99d0cd9e40cfa89ae9a0f19.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         height: "100vh",
@@ -50,6 +49,7 @@ export default function TariffsPage() {
           marginBottom: "20px",
           border: "1px solid #444",
           textAlign: "center",
+          marginTop: 20,
         }}
       >
         <h1 className="title" style={{ color: "white" }}>
@@ -61,7 +61,7 @@ export default function TariffsPage() {
         className="columns is-multiline"
         style={{ justifyContent: "center" }}
       >
-        {tariffs.map((tariff) => (
+        {taxes.map((tariff) => (
           <div key={tariff.id} className="column is-half">
             <div
               className="card"
@@ -171,7 +171,6 @@ export default function TariffsPage() {
           </div>
         ))}
       </div>
-
       <div
         style={{
           marginTop: "20px",
@@ -193,7 +192,7 @@ export default function TariffsPage() {
         <h3 className="title is-6" style={{ color: "white" }}>
           Льготы:
         </h3>
-        <ul style={{ listStyleType: "none", paddingLeft: 0 }}>
+        <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
           <li style={{ color: "white" }}>— Илье - вход бесплатно (навсегда)</li>
           <li style={{ color: "white" }}>
             — Кириллу - вход бесплатно (навсегда)

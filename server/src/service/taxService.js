@@ -1,25 +1,15 @@
 const { Tax } = require('../db/models');
 
 exports.getAllTaxes = async () => {
-  return await Tax.findAll();
+  const taxes = await Tax.findAll();
+  return taxes;
 };
 
-exports.createTax = async (taxData) => {
-  return await Tax.create(taxData);
-};
-
-exports.updateTax = async (id, taxData) => {
-  const tax = await Tax.findByPk(id);
+exports.updateTax = async (taxData) => {
+  const tax = await Tax.findOne();
   if (!tax) {
     throw new Error('Тариф не найден');
   }
+
   return await tax.update(taxData);
-};
-
-exports.deleteTax = async (id) => {
-  const tax = await Tax.findByPk(id);
-  if (!tax) {
-    throw new Error('Тариф не найден');
-  }
-  await tax.destroy();
 };
