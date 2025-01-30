@@ -10,6 +10,7 @@ import AnimalsPage from './pages/AnimalsPage/AnimalsPage'
 import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
+import NotFound from './pages/NotFound/NotFound'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
     {
       path: '/',
       element: <Layout user={user} setUser={setUser}/>,
+      errorElement: <NotFound />,
       children: [
         {
           path: '/',
