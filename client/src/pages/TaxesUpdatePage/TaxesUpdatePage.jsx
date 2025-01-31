@@ -15,7 +15,7 @@ export default function TaxesUpdatePage({ user }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
-  const [inputError, setInputError] = useState(""); 
+  const [inputError, setInputError] = useState("");
 
   useEffect(() => {
     const fetchTariff = async () => {
@@ -45,16 +45,16 @@ export default function TaxesUpdatePage({ user }) {
         ...prevState,
         [name]: value,
       }));
-      setInputError(""); 
+      setInputError("");
     } else {
-      setInputError("Должно быть не более 4 символов"); 
+      setInputError("Должно быть не более 4 символов");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (inputError) {
+    if (inputError && inputError !== "Должно быть не более 4 символов") {
       return;
     }
 
@@ -88,20 +88,18 @@ export default function TaxesUpdatePage({ user }) {
           <div
             style={{
               padding: "20px",
-              backgroundColor: "rgba(129, 253, 141, 0.8)",
+              backgroundColor: "rgba(129,253,141,0.8)",
               borderRadius: "8px",
               color: "white",
               width: "400px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.5)",
             }}
           >
             <h1 className="title has-text-centered">Обновить тариф</h1>
             {successMessage && (
               <div style={{ color: "green" }}>{successMessage}</div>
             )}
-            {inputError && (
-              <div style={{ color: "red" }}>{inputError}</div> 
-            )}
+            {inputError && <div style={{ color: "red" }}>{inputError}</div>}
 
             <form onSubmit={handleSubmit} className="box">
               {["Adult", "Child", "weekendAdult", "weekendChild"].map(
@@ -120,7 +118,7 @@ export default function TaxesUpdatePage({ user }) {
                     </label>
                     <div className="control">
                       <input
-                        maxLength="4" 
+                        maxLength="4"
                         className="input"
                         type="number"
                         name={fieldName}
