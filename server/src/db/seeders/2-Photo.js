@@ -6,42 +6,42 @@ module.exports = {
    await Photo.bulkCreate([
     {
       
-      url: '/images/1-Elepaht.jpg',
+      url: '/Elephant/1-Elepaht.jpg',
       animalsId: 1
     },
     {
      
-      url: '/images/2-elepph.jpg',
+      url: '/Elephant/2-elepph.jpg',
       animalsId: 1
     },
     {
     
-      url: '/images/2-lion.jpg',
+      url: '/Lion/2-lion.jpg',
       animalsId: 2
     },
     {
       
-      url: '/images/1-lion.jpg',
+      url: '/Lion/1-lion.jpg',
       animalsId: 2
     },
     {
      
-      url: '/images/1-panda.jpg',
+      url: '/Giant Pand/1-panda.jpg',
       animalsId: 3
     },
     {
 
-      url: '/images/2-panda.jpg',
+      url: '/Giant Pand/2-panda.jpg',
       animalsId: 3
     },
     {
 
-      url: '/images/1-eagl.jpg',
+      url: '/Bald Eagle/1-eagl.jpg',
       animalsId: 4
     },
     {
 
-      url: '/images/2-eagle.jpg',
+      url: '/Bald Eagle/2-eagle.jpg',
       animalsId: 4
     },
   ])
