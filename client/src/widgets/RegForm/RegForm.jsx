@@ -47,7 +47,7 @@ export default function RegForm( { setUser }) {
   }
 
   return (
-    <form onSubmit={regHandler}> 
+    <form onSubmit={regHandler} noValidate> 
       {error && <div className="notification is-danger" style={{ maxWidth: "333px"}}>{error}</div>}  
           <div className="field">
             <div className="control">
