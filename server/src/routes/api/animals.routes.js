@@ -1,8 +1,26 @@
 const router = require('express').Router();
-const { where } = require('sequelize');
+const fs = require('fs').promises
+const path = require('path')
 const {Photo, Animal} = require('../../db/models')
 const formatResponse = require('../../utils/formatResponse')
 
+
+
+async function delFiles (id){
+    try {
+          console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,");
+         const animal = await Animal.findOne({where:{id}})
+          const dirPath = path.resolve(__dirname, '../../../public/images', animal.title);
+          console.log(`Удаление папки: ${dirPath}`);
+    
+          // Удаляем папку рекурсивно, если она существует
+          await fs.rm(dirPath, { recursive: true, force: true });
+    
+          console.log(`Папка ${dirPath} успешно удалена.`);
+        } catch (err) {
+          console.error(`Ошибка при удалении папки: ${err.message}`);
+        }
+    }
 
 router
     .route('/')
@@ -24,9 +42,9 @@ router
     .delete(async (req,res)=>{
         try {
           const {id} = req.params
-          
+          await delFiles(id)
           const animal = await Animal.destroy({where:{id}})
-
+          
           console.log(animal);
           
 

@@ -22,10 +22,25 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Animal',
+  }
+);
+  
+  Animal.addHook('beforeDestroy', async (animal, options) => {
+    try {
+      console.log("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<,");
+      
+      const dirPath = path.resolve(__dirname, '../../../public/images', animal.title);
+      console.log(`Удаление папки: ${dirPath}`);
+
+      // Удаляем папку рекурсивно, если она существует
+      await fs.rm(dirPath, { recursive: true, force: true });
+
+      console.log(`Папка ${dirPath} успешно удалена.`);
+    } catch (err) {
+      console.error(`Ошибка при удалении папки: ${err.message}`);
+    }
   });
-  Animal.addHook('afterDestroy', async (animal, options) => {
-    return fs.rmdir(path.resolve(__dirname, `../../../public/images/${animal.title}`))
-  });
+
 
   return Animal;
 };

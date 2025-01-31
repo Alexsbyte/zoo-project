@@ -23,7 +23,7 @@ export default function AnimalCard({animal}) {
         {animal.photos.map((el) => (
           <SwiperSlide key={el.id}>
             <figure className="image is-4by3">
-              <img src={`${import.meta.env.VITE_IMAGES}/public${el.url}`} alt={`Фото ${animal.title}`} />
+              <img src={`${import.meta.env.VITE_IMAGES}/public/images/${el.url}`} alt={`Фото ${animal.title}`} />
             </figure>
           </SwiperSlide>
         ))}

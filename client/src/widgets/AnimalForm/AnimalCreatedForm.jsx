@@ -4,7 +4,7 @@ import { axiosInstance } from '../../shared/lib/axiosInstance';
 
 
 
-export default function AnimalCreatedEditedFrom() {
+export default function AnimalCreatedEditedFrom({animals, setAnimals, setAdd}) {
 
   const [inputs , setInputs] = useState({title:'',description:''})
   const [files, setFiles] = useState([]);
@@ -35,13 +35,19 @@ formData.append('description', inputs.description)
 
 
   try {
-    const response = await axiosInstance.post('/api/upload',formData, {
+    const {data} = await axiosInstance.post('/api/upload',formData, {
       headers: { 'Content-Type': 'multipart/form-data' , 'title': `${inputs.title}`},
+     
     })
+    console.log(data.data);
+    
+    setAdd((prev)=> !prev)
+    setInputs(()=> ({title: '', description: ''}))
+    setFiles([])
   } catch (error) {
     console.error("Error uploading data:", error);
   }
-
+  
 }
 
 

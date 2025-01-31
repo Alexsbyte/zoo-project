@@ -1,5 +1,4 @@
-import axios from 'axios';
-import React, { useEffect } from 'react'
+
 import { useState , useRef} from 'react';
 import { axiosInstance } from '../../shared/lib/axiosInstance';
 
@@ -11,8 +10,7 @@ export default function AnimalEditCard({animals, setAnimals}) {
   const [photos, setPhotos] = useState(animals.photos);
   
 
-
-
+ 
 
     const handleRemovePhoto = (id) => {
         //тут прописываем запрос на сервер на удаление фото из БД
@@ -67,7 +65,7 @@ export default function AnimalEditCard({animals, setAnimals}) {
                     onClick={() => handleRemovePhoto(photo.id)}
                   ></button>
                 )}
-                <img className="is-rounded" src={`${import.meta.env.VITE_IMAGES}/public${photo.url}`} alt={`Фото ${title}`} />
+                <img className="is-rounded" src={`${import.meta.env.VITE_IMAGES}/public/images${photo.url}`} alt={`Фото ${title}`} />
               </figure>
             </div>
           ))}

@@ -18,21 +18,21 @@ router.post('/',createFolder, upload.array('photo', 5), async(req, res) => {
   console.log(pathNameAnimalPhoto);
   
           const animal = await Animal.create({title,description})
-          // console.log(animal);
+          console.log(animal);
           
           if(!animal){
              return  res.status(400).json(formatResponse(400, 'Животное не создано' ))
            }
-          //  console.log(animal.id)
+           console.log(req.files)
            const photos =  req.files.map(({filename})=> ({ url:`/${pathNameAnimalPhoto}/${filename}`, animalsId: animal.id}))
-           console.log(photos)
+          //  console.log(photos)
           
-           const arrPhoto = await Photo.create(photos[0])
-           console.log(arrPhoto);
+           const arrPhoto = await Photo.bulkCreate(photos)
+          //  console.log(arrPhoto);
            if(!arrPhoto){
             return  res.status(400).json(formatResponse(400, 'Фото не добавлено' ))
            }
-           return res.status(201).json(formatResponse(201, 'Успешно добавлено' ))
+           return res.status(201).json(formatResponse(201, 'Успешно добавлено' , animal))
   
   } catch (error) {
     res.status(500).json(formatResponse(500, 'Сервер не отвечает', null, error ))
