@@ -9,7 +9,6 @@ export default function AdminPage({ user }) {
           className="hero is-flex is-justify-content-center is-align-items-center"
           style={{
             backgroundImage: `url('https://aws-tiqets-cdn.imgix.net/images/content/3dd2e3de44474186a1e480190e53a232.jpg?auto=format&fit=crop&ixlib=python-3.2.1&q=70&s=e3417bb6c35d91c841bf7a92cdb215e2)`,
-            // backgroundImage: `url('https://i.pinimg.com/originals/24/11/31/241131b8c99d0cd9e40cfa89ae9a0f19.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "100vh",
@@ -46,6 +45,9 @@ export default function AdminPage({ user }) {
               </div>
             </div>
           </div>
+             <Link to="/" className="button is-warning" style={{ marginRight: "1%" }}>
+                  На главную
+                </Link>
         </div>
       ) : (
         <div
