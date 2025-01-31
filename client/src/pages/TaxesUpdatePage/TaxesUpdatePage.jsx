@@ -65,7 +65,7 @@ export default function TaxesUpdatePage({ user }) {
 
       setTimeout(() => {
         navigate("/taxes");
-      }, 3000); 
+      }, 3000);
     } catch (error) {
       console.error(error);
       setError("Ошибка при обновлении тарифа");
@@ -92,20 +92,24 @@ export default function TaxesUpdatePage({ user }) {
           <div
             style={{
               padding: "20px",
-              backgroundColor: "rgba(129,253,141,0.8)",
+              backgroundColor: "rgba(0, 111, 89, 0.72)",
               borderRadius: "8px",
-              color: "white",
+              color: "rgb(255, 255, 255)", 
               width: "400px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.5)",
+              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", 
             }}
           >
-            <h1 className="title has-text-centered">Обновить тариф</h1>
+            <h1
+              className="title has-text-centered"
+              style={{ color: "rgb(255, 251, 0)" }}
+            >
+              Обновить тариф
+            </h1>
             {successMessage && (
               <div
                 className="notification is-success"
                 style={{
-                  backgroundColor: "Orange", 
-                  color: "#ffffff", 
+                  backgroundColor: "#28a745",
                   marginBottom: "15px",
                 }}
               >
@@ -159,7 +163,7 @@ export default function TaxesUpdatePage({ user }) {
             backgroundSize: "cover",
             backgroundPosition: "center",
             height: "100vh",
-            color: "white",
+            color: "#ffcc00",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -170,7 +174,7 @@ export default function TaxesUpdatePage({ user }) {
             style={{
               fontSize: "15rem",
               marginBottom: "20px",
-              color: "orange",
+              color: "#ffcc00", 
               marginRight: "20%",
             }}
           >
@@ -181,7 +185,7 @@ export default function TaxesUpdatePage({ user }) {
             style={{
               fontSize: "3rem",
               marginBottom: "20px",
-              color: "orange",
+              color: "#ffcc00", 
               marginRight: "20%",
             }}
           >
@@ -192,7 +196,7 @@ export default function TaxesUpdatePage({ user }) {
             style={{
               fontSize: "1.5rem",
               marginBottom: "20px",
-              color: "orange",
+              color: "#ffcc00", 
               marginRight: "20%",
             }}
           >

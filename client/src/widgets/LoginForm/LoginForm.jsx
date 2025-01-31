@@ -62,6 +62,7 @@ export default function LoginForm( { setUser }) {
               <button 
               type='submit' 
               className="button is-primary" 
+              style={{color: "rgb(56, 40, 40)"}}
               disabled={isDisabled}
             >Войти</button>
             </div>

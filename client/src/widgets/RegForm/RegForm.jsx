@@ -47,61 +47,80 @@ export default function RegForm( { setUser }) {
   }
 
   return (
-    <form onSubmit={regHandler} noValidate> 
-      {error && <div className="notification is-danger" style={{ maxWidth: "333px"}}>{error}</div>}  
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input"  
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="username"
-              value={formData.username} 
-              type="text" 
-              placeholder="Введите имя пользователя" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input"  
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="email" 
-              value={formData.email} 
-              type="email" 
-              placeholder="Введите email" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input" 
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="password" 
-              value={formData.password} 
-              type="password" 
-              placeholder="Введите пароль" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input" 
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="confPass"
-              value={formData.confPass}  
-              type="password" 
-              placeholder="Подтвердите пароль" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <button 
-              type='submit' 
-              className="button is-primary" 
-              disabled={isDisabled}
-            >Зарегистрироваться</button>
-            </div>
-          </div>
-        </form>
-  )
+    <form onSubmit={regHandler} noValidate>
+      {error && (
+        <div className="notification is-danger" style={{ maxWidth: "333px" }}>
+          {error}
+        </div>
+      )}
+      <div className="field">
+        <div className="control">
+          <input
+            className="input"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+            name="username"
+            value={formData.username}
+            type="text"
+            placeholder="Введите имя пользователя"
+          />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <input
+            className="input"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+            name="email"
+            value={formData.email}
+            type="email"
+            placeholder="Введите email"
+          />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <input
+            className="input"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+            name="password"
+            value={formData.password}
+            type="password"
+            placeholder="Введите пароль"
+          />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <input
+            className="input"
+            onChange={(e) =>
+              setFormData({ ...formData, [e.target.name]: e.target.value })
+            }
+            name="confPass"
+            value={formData.confPass}
+            type="password"
+            placeholder="Подтвердите пароль"
+          />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <button
+            type="submit"
+            className="button is-primary"
+            style={{ color: "rgb(255, 255, 255)" }}
+            disabled={isDisabled}
+          >
+            Зарегистрироваться
+          </button>
+        </div>
+      </div>
+    </form>
+  );
 }
