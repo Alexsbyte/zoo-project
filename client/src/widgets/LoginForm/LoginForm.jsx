@@ -11,20 +11,25 @@ export default function LoginForm( { setUser }) {
   const navigete = useNavigate()
   useEffect(() => {
     const {email, password} = formData
-    if(email !== '' &&
-      password !== '') {
-      setDisabled(false)
+    if (
+      email.trim() &&
+      password.trim() &&
+      password.trim().length >=8
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
-  }, [formData.email, formData.password])
+  }, [formData])
 
 
   async function regHandler(e) {
     e.preventDefault()
     const {email, password} = formData
     const { data } = await apiUser.login({ email, password })
-    console.log('LOGINFORM', data);
-    setAccessToken(data.data.accessToken)
-    setUser(data.data.user)
+    // console.log('LOGINFORM', data);
+    setAccessToken(data.accessToken)
+    setUser(data.user)
     navigete('/')
   }
 
@@ -34,7 +39,7 @@ export default function LoginForm( { setUser }) {
             <div className="control">
               <input 
               className="input"  
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
+              onChange={(e)=>setFormData({...formData, email: e.target.value})} 
               name="email" 
               value={formData.email} 
               type="email" 
@@ -45,7 +50,7 @@ export default function LoginForm( { setUser }) {
             <div className="control">
               <input 
               className="input" 
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
+              onChange={(e)=>setFormData({...formData, password: e.target.value})} 
               name="password" 
               value={formData.password} 
               type="password" 

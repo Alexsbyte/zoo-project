@@ -42,8 +42,8 @@ function App() {
   async function handlerRefresh() {
       try {
         const token = document.cookie.split('=')[1]
+        // console.log(token)
         if (token) {
-          console.log(token)
           const {data} = await apiUser.refreshTokens()
           setAccessToken(data.accessToken)
           setUser(data.user)
