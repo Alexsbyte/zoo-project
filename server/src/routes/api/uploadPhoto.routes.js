@@ -2,8 +2,6 @@ const router = require('express').Router();
 const upload = require('../../middleware/multer');
 const {Animal, Photo} = require('../../db/models')
 const formatResponse  = require('../../utils/formatResponse')
-const fs =require('fs')
-const path = require('path')
 const createFolder = require('../../middleware/createFolder')
 
 router.post('/',createFolder, upload.array('photo', 5), async(req, res) => {

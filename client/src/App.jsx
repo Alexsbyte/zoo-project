@@ -34,7 +34,7 @@ function App() {
     const {data} = await apiAnimal.getAnimalsAndPhotos()
     const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
     setAnimals(animalsArr) 
-    console.log(animalsArr);
+    // console.log(animalsArr);
     
   }
 

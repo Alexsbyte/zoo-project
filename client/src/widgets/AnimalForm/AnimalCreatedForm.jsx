@@ -1,6 +1,5 @@
 
 import { useState, useRef } from 'react';
-import axios from 'axios';
 import { axiosInstance } from '../../shared/lib/axiosInstance';
 
 
@@ -20,6 +19,8 @@ const handleReset = () => {
 
 const handleUpload = async (event) => {
   event.preventDefault()
+  console.log(files,inputs );
+  
   if (files.length === 0) {
     alert('Выберите файлы!');
     return;
@@ -31,7 +32,6 @@ const handleUpload = async (event) => {
   });
  formData.append('title',inputs.title)
 formData.append('description', inputs.description)
-console.log(inputs.title,inputs.description);
 
 
   try {
@@ -41,9 +41,6 @@ console.log(inputs.title,inputs.description);
   } catch (error) {
     console.error("Error uploading data:", error);
   }
-
-
-
 
 }
 
