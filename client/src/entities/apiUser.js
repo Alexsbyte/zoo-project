@@ -12,8 +12,7 @@ export default class apiUser {
       email,
       password,
     });
-    console.log('APIUSER-REG>>>>>', result);
-    return result;
+    return result.data;
   }
 
   static async login({ email, password }) {
@@ -21,13 +20,11 @@ export default class apiUser {
       email,
       password,
     });
-    console.log('APIUSER-LOGIN>>>>>', result);
-    return result;
+    return result.data;
   }
 
   static async logout() {
     const result = await axiosInstance.get('/auth/logout');
-    console.log('APIUSER-LOGOUT>>>>>', result);
     return result;
   }
 }

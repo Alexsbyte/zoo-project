@@ -24,6 +24,7 @@ import NotFound from './pages/NotFound/NotFound'
 
 function App() {
   const [user, setUser] = useState({})
+  const [isLoaded, setLoaded] = useState(false)
   const [toggle, setToggle] = useState(false)
   const [animals , setAnimals] = useState([])
 
@@ -40,12 +41,16 @@ function App() {
     
   }
 
+
   async function handlerRefresh() {
-      const {data} = await apiUser.refreshTokens()
-      console.log(data);
-      
-      setAccessToken(data.accessToken)
-      setUser(data.user)
+      try {
+        const {data} = await apiUser.refreshTokens()
+        setAccessToken(data.accessToken)
+        setUser(data.user)
+        setLoaded(true)
+      } catch (error) {
+        setLoaded(true)
+      }
     }
   
     useEffect(() => {
@@ -55,8 +60,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout user={user} setUser={setUser}/>,
-      // errorElement: <NotFound />,
+      element: <Layout user={user} setUser={setUser} isLoaded={isLoaded}/>,
+      errorElement: <NotFound />,
       children: [
         {
 

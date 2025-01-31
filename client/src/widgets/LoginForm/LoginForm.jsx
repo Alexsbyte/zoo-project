@@ -7,60 +7,76 @@ export default function LoginForm( { setUser }) {
 
   const [formData, setFormData] = useState({email: '', password: ''})
   const [isDisabled, setDisabled] = useState(true)
+  const [error, setError] = useState(null);
 
   const navigete = useNavigate()
   useEffect(() => {
-    const {email, password} = formData
-    if(email !== '' &&
-      password !== '') {
-      setDisabled(false)
+    const { email, password } = formData;
+
+    if (
+      email.trim() &&
+      password.trim() &&
+      password.trim().length >= 8
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
-  }, [formData.email, formData.password])
+  }, [formData]);
 
 
   async function regHandler(e) {
     e.preventDefault()
-    const {email, password} = formData
-    const { data } = await apiUser.login({ email, password })
-    console.log('LOGINFORM', data);
-    setAccessToken(data.data.accessToken)
-    setUser(data.data.user)
-    navigete('/')
+    try {
+      const {email, password} = formData
+      const  {data}  = await apiUser.login({ email, password })
+      setAccessToken(data.accessToken)
+      setUser(data.user)
+      navigete('/')
+    } catch (error) {
+      setAccessToken('')
+      setUser({})
+      const { message } = error.response.data
+      setError(message || 'An error occurred during login')
+      setTimeout(() => {
+        setError(null)
+      }, 4000)
+      
+    }
   }
 
   return (
-    <form onSubmit={regHandler}> 
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input"  
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="email" 
-              value={formData.email} 
-              type="email" 
-              placeholder="Введите email" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <input 
-              className="input" 
-              onChange={(e)=>setFormData({...formData, [e.target.name]: e.target.value})} 
-              name="password" 
-              value={formData.password} 
-              type="password" 
-              placeholder="Введите пароль" />
-            </div>
-          </div>
-          <div className="field">
-            <div className="control">
-              <button 
-              type='submit' 
-              className="button is-primary" 
-              disabled={isDisabled}
-            >Войти</button>
-            </div>
-          </div>
-        </form>
+    <form onSubmit={regHandler} noValidate style={{width: "350px"}}> 
+      {error && <div className="notification is-danger">{error}</div>}
+      <div className="field">
+        <div className="control">
+          <input 
+          className="input"  
+          onChange={(e)=>setFormData({...formData, email: e.target.value})}  
+          value={formData.email} 
+          type="email" 
+          placeholder="Введите email" />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <input 
+          className="input" 
+          onChange={(e)=>setFormData({...formData, password: e.target.value})} 
+          value={formData.password} 
+          type="password" 
+          placeholder="Введите пароль не менее 8 символов" />
+        </div>
+      </div>
+      <div className="field">
+        <div className="control">
+          <button 
+          type='submit' 
+          className="button is-primary" 
+          disabled={isDisabled}
+        >Войти</button>
+        </div>
+      </div>
+    </form>
   )
 }

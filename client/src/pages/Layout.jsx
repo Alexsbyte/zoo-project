@@ -3,7 +3,7 @@ import Nav from "../shared/ui/Nav";
 import Footer from "../shared/ui/Footer";
 import { Outlet } from "react-router-dom";
 
-export default function Layout({user, setUser }) {
+export default function Layout({user, setUser, isLoaded }) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ export default function Layout({user, setUser }) {
         minHeight: "100vh",
       }}
     >
-      <Nav user={user} setUser={setUser} />
+      <Nav user={user} setUser={setUser} isLoaded={isLoaded} />
       <main style={{ flex: "1" }}>
         <Outlet />
       </main>
