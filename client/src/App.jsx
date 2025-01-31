@@ -25,11 +25,12 @@ function App() {
   const [isLoaded, setLoaded] = useState(false)
   const [toggle, setToggle] = useState(false)
   const [animals , setAnimals] = useState([])
+  const [onAdd, setAdd] = useState(false)
 
    useEffect(()=>{
         getAnimalsAndPhoto()
-      },[toggle])
-        
+      },[toggle, onAdd])
+    
   const getAnimalsAndPhoto = async ()=> {
     const {data} = await apiAnimal.getAnimalsAndPhotos()
     const animalsArr =  await data.data.map(el => ({id:el.id, title:el.title, description: el.description, photos:el.Photos}))
@@ -84,7 +85,7 @@ function App() {
         },
         {
           path: '/edit/animals',
-          element: <AnimalEditPage animals={animals}  setAnimals={setAnimals} />
+          element: <AnimalEditPage animals={animals}  setAnimals={setAnimals} setAdd={setAdd}/>
         },
         {
           path: "/admin",
