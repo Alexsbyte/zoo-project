@@ -57,7 +57,7 @@ export default function AnimalEditCard({animals, setAnimals}) {
         <div className="is-flex is-flex-wrap-wrap">
           {photos.map((photo) => (
             <div className="mr-2 mb-2" key={photo.id}>
-              <figure className="image is-64x64 is-relative">
+              <figure className="image is-128x128 is-relative">
                 {isEditing && (
                   <button
                     className="delete is-small"
