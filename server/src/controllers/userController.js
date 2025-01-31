@@ -1,9 +1,9 @@
 const formatResponse = require('../utils/formatResponse');
 const bcrypt = require('bcrypt');
-const { Customer } = require('../db/models');
 const { generateTokens } = require('../utils/generateTokens');
 const jwtConfig = require('../config/jwtConfig');
 const UserValidator = require('../utils/userValidation');
+const UserService = require('../service/userService');
 
 module.exports = class UserController {
   static async login(req, res) {
@@ -17,11 +17,7 @@ module.exports = class UserController {
       }
 
       if (email && password) {
-        const candidate = await Customer.findOne({
-          where: {
-            email,
-          },
-        });
+        const candidate = await UserService.authenticate(email);
 
         if (!candidate) {
           return res
@@ -58,7 +54,15 @@ module.exports = class UserController {
     }
   }
 
-  static async logout(req, res) {}
+  static async logout(req, res) {
+    try {
+      res
+        .clearCookie(jwtConfig.refresh.type)
+        .json(formatResponse('200', 'logout success'));
+    } catch (error) {
+      res.json(formatResponse('500', 'Server error', null, error.message));
+    }
+  }
 
   static async reg(req, res) {
     try {
@@ -73,12 +77,7 @@ module.exports = class UserController {
 
         const hashPass = await bcrypt.hash(password, 10);
 
-        const candidate = await Customer.create({
-          username,
-          email,
-          password: hashPass,
-          roleId: 2,
-        });
+        const candidate = await UserService.createNewUser({ username, email, hashPass });
 
         const user = candidate.get({ plain: true });
 
@@ -107,5 +106,20 @@ module.exports = class UserController {
     }
   }
 
-  static async refreshTokens(req, res) {}
+  static async refreshTokens(req, res) {
+    try {
+      const { user } = res.locals;
+
+      const { accessToken, refreshToken } = generateTokens(user);
+
+      res.cookie(jwtConfig.refresh.type, refreshToken).json(
+        formatResponse(200, 'Refresh tokens success', {
+          user,
+          accessToken,
+        }),
+      );
+    } catch (error) {
+      res.json(formatResponse(500, null, null, error.message));
+    }
+  }
 };
