@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import apiTaxes from "../../entities/apiTaxes";
+import "bulma/css/bulma.css";
 
 export default function TaxesUpdatePage({ user }) {
   const navigate = useNavigate();
@@ -61,7 +62,10 @@ export default function TaxesUpdatePage({ user }) {
     try {
       await apiTaxes.updateTax(tariff);
       setSuccessMessage("Тариф успешно обновлен!");
-      navigate("/taxes");
+
+      setTimeout(() => {
+        navigate("/taxes");
+      }, 3000); 
     } catch (error) {
       console.error(error);
       setError("Ошибка при обновлении тарифа");
@@ -97,9 +101,20 @@ export default function TaxesUpdatePage({ user }) {
           >
             <h1 className="title has-text-centered">Обновить тариф</h1>
             {successMessage && (
-              <div style={{ color: "green" }}>{successMessage}</div>
+              <div
+                className="notification is-success"
+                style={{
+                  backgroundColor: "Orange", 
+                  color: "#ffffff", 
+                  marginBottom: "15px",
+                }}
+              >
+                {successMessage}
+              </div>
             )}
-            {inputError && <div style={{ color: "red" }}>{inputError}</div>}
+            {inputError && (
+              <div className="notification is-danger">{inputError}</div>
+            )}
 
             <form onSubmit={handleSubmit} className="box">
               {["Adult", "Child", "weekendAdult", "weekendChild"].map(
