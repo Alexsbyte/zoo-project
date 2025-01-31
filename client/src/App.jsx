@@ -12,10 +12,8 @@ import AnimalsPage from '../src/pages/AnimalsPage/AnimalsPage'
 import apiUser from './entities/apiUser'
 import { setAccessToken } from './shared/lib/axiosInstance'
 import AdminPage from './pages/AdminPage/AdminPage'
-
 import AnimalEditPage from './pages/AnimalEditPage/AnimalEditPage'
 import apiAnimal from './entities/apiAnimal'
-
 import TaxesUpdatePage from './pages/TaxesUpdatePage/TaxesUpdatePage'
 import NotFound from './pages/NotFound/NotFound'
 
@@ -30,7 +28,6 @@ function App() {
 
    useEffect(()=>{
         getAnimalsAndPhoto()
-    
       },[toggle])
         
   const getAnimalsAndPhoto = async ()=> {
@@ -44,9 +41,13 @@ function App() {
 
   async function handlerRefresh() {
       try {
-        const {data} = await apiUser.refreshTokens()
-        setAccessToken(data.accessToken)
-        setUser(data.user)
+        const token = document.cookie.split('=')[1]
+        if (token) {
+          console.log(token)
+          const {data} = await apiUser.refreshTokens()
+          setAccessToken(data.accessToken)
+          setUser(data.user)
+        }
         setLoaded(true)
       } catch (error) {
         setLoaded(true)
@@ -54,7 +55,7 @@ function App() {
     }
   
     useEffect(() => {
-      handlerRefresh()
+        handlerRefresh()  
     }, [])
 
   const router = createBrowserRouter([
