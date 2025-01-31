@@ -15,11 +15,17 @@ import NotFound from './pages/NotFound/NotFound'
 
 function App() {
   const [user, setUser] = useState({})
+  const [isLoaded, setLoaded] = useState(false)
 
   async function handlerRefresh() {
-      const {data} = await apiUser.refreshTokens()
-      setAccessToken(data.accessToken)
-      setUser(data.user)
+      try {
+        const {data} = await apiUser.refreshTokens()
+        setAccessToken(data.accessToken)
+        setUser(data.user)
+        setLoaded(true)
+      } catch (error) {
+        setLoaded(true)
+      }
     }
   
     useEffect(() => {
@@ -29,7 +35,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Layout user={user} setUser={setUser}/>,
+      element: <Layout user={user} setUser={setUser} isLoaded={isLoaded}/>,
       errorElement: <NotFound />,
       children: [
         {

@@ -14,6 +14,16 @@ export default function Nav({user, setUser, isLoaded}) {
     setUser({})
     navigate('/')
   }
+  
+
+  if (!isLoaded) {
+    return (
+      <nav className="navbar" style={{ height: "64px"}}>
+        <div className="navbar-brand">
+        </div>
+      </nav>
+    );
+  }
 
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">

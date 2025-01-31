@@ -1,11 +1,11 @@
 class UserValidator {
-  static validateSignUp(data) {
-    const { name, email, password } = data;
+  static validateReg(data) {
+    const { username, email, password } = data;
 
-    if (!name || typeof name !== 'string' || name.trim() === '') {
+    if (!username || typeof username !== 'string' || username.trim() === '') {
       return {
         isValid: false,
-        error: 'Поле не должно быть пустым или не верный формат',
+        error: 'Поле "name" не должно быть пустым или не верный формат',
       };
     }
 
@@ -17,8 +17,7 @@ class UserValidator {
     ) {
       return {
         isValid: false,
-        error:
-          'Email is required, must be a non-empty string, and must be a valid email address.',
+        error: 'Поле "email" не должно быть пустым или не верный формат',
       };
     }
 
@@ -31,7 +30,7 @@ class UserValidator {
       return {
         isValid: false,
         error:
-          'Password is required, must be a non-empty string, contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.',
+          'Пароль обязателен, не менее 8 символов, должен содержать строчные буквы, цифры,специальные символы.',
       };
     }
     return {
@@ -51,7 +50,7 @@ class UserValidator {
     ) {
       return {
         isValid: false,
-        error: 'Поле не должно быть пустым или не верный формат',
+        error: 'Поле "email" не должно быть пустым или не верный формат',
       };
     }
 

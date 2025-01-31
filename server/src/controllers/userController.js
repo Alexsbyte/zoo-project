@@ -64,9 +64,13 @@ module.exports = class UserController {
     try {
       const { username, email, password } = req.body;
 
-      UserValidator;
-
       if (username && email && password) {
+        const check = UserValidator.validateReg({ username, email, password });
+
+        if (!check.isValid) {
+          return res.status(400).json(formatResponse(400, check.error));
+        }
+
         const hashPass = await bcrypt.hash(password, 10);
 
         const candidate = await Customer.create({
@@ -75,6 +79,7 @@ module.exports = class UserController {
           password: hashPass,
           roleId: 2,
         });
+
         const user = candidate.get({ plain: true });
 
         delete user.password;
@@ -92,9 +97,13 @@ module.exports = class UserController {
         res.status(400).json(formatResponse(400, 'Нужно заполнить все поля'));
       }
     } catch (error) {
-      res
-        .status(500)
-        .json(formatResponse(200, 'Unxpected server error', null, error.message));
+      const { message } = error.errors[0];
+      if (message === 'email must be unique') {
+        return res
+          .status(400)
+          .json(formatResponse(400, 'Пользователь с таким email уже существует'));
+      }
+      res.status(500).json(formatResponse(200, 'Unxpected server error', null, error));
     }
   }
 

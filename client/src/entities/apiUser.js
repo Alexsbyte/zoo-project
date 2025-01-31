@@ -16,17 +16,11 @@ export default class apiUser {
   }
 
   static async login({ email, password }) {
-    // try {
     const result = await axiosInstance.post('/auth/login', {
       email,
       password,
     });
-    // console.log(result);
     return result.data;
-    // } catch (error) {
-    //   console.log('APIUSER CATCH', error.response);
-    //   return error;
-    // }
   }
 
   static async logout() {

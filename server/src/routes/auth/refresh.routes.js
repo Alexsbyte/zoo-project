@@ -7,7 +7,6 @@ const verifyRefreshToken = require('../../middleware/verifyRefreshToken.js');
 router.get('/', verifyRefreshToken, (req, res) => {
   try {
     const { user } = res.locals;
-    console.log('REFRESH>>>>>>>');
 
     const { accessToken, refreshToken } = generateTokens(user);
 

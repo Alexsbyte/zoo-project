@@ -7,32 +7,48 @@ export default function RegForm( { setUser }) {
 
   const [formData, setFormData] = useState({username: '', email: '', password: '', confPass: ''})
   const [isDisabled, setDisabled] = useState(true)
+  const [error, setError] = useState(null);
 
   const navigete = useNavigate()
   useEffect(() => {
-    const {username, email, password, confPass} = formData
-    if(username !== '' &&
-      email !== '' &&
-      password !== '' && 
-      confPass !== '' && 
-      formData.password === formData.confPass) {
-      setDisabled(false)
-    }
-  }, [formData])
+    const { username, email, password, confPass } = formData;
 
+    if (
+      username.trim() &&
+      email.trim() &&
+      password.trim() &&
+      password.trim().length >=8 &&
+      confPass.trim() &&
+      password === confPass
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [formData]);
 
   async function regHandler(e) {
     e.preventDefault()
-    const {username, email, password} = formData
-    const { data } = await apiUser.reg({ username, email, password })
-    console.log('REGFORM', data);
-    setAccessToken(data.accessToken)
-    setUser(data.user)
-    navigete('/')
+    try {
+      const {username, email, password} = formData
+      const { data } = await apiUser.reg({ username, email, password })
+      setAccessToken(data.accessToken)
+      setUser(data.user)
+      navigete('/')
+    } catch (error) {
+      setAccessToken('')
+      setUser({})
+      const { message } = error.response.data
+      setError(message || 'An error occurred during login')
+      setTimeout(() => {
+        setError(null)
+      }, 4000)
+    }
   }
 
   return (
     <form onSubmit={regHandler}> 
+      {error && <div className="notification is-danger" style={{ maxWidth: "333px"}}>{error}</div>}  
           <div className="field">
             <div className="control">
               <input 

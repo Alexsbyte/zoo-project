@@ -11,12 +11,18 @@ export default function LoginForm( { setUser }) {
 
   const navigete = useNavigate()
   useEffect(() => {
-    const {email, password} = formData
-    if(email !== '' &&
-      password !== '') {
-      setDisabled(false)
+    const { email, password } = formData;
+
+    if (
+      email.trim() &&
+      password.trim() &&
+      password.trim().length >= 8
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
-  }, [formData.email, formData.password])
+  }, [formData]);
 
 
   async function regHandler(e) {
@@ -24,7 +30,6 @@ export default function LoginForm( { setUser }) {
     try {
       const {email, password} = formData
       const  {data}  = await apiUser.login({ email, password })
-      console.log(data);
       setAccessToken(data.accessToken)
       setUser(data.user)
       navigete('/')
@@ -32,17 +37,16 @@ export default function LoginForm( { setUser }) {
       setAccessToken('')
       setUser({})
       const { message } = error.response.data
-      console.log(message);
       setError(message || 'An error occurred during login')
       setTimeout(() => {
         setError(null)
-      }, 3000)
+      }, 4000)
       
     }
   }
 
   return (
-    <form onSubmit={regHandler}> 
+    <form onSubmit={regHandler} noValidate style={{width: "350px"}}> 
       {error && <div className="notification is-danger">{error}</div>}
       <div className="field">
         <div className="control">
@@ -61,7 +65,7 @@ export default function LoginForm( { setUser }) {
           onChange={(e)=>setFormData({...formData, password: e.target.value})} 
           value={formData.password} 
           type="password" 
-          placeholder="Введите пароль" />
+          placeholder="Введите пароль не менее 8 символов" />
         </div>
       </div>
       <div className="field">
