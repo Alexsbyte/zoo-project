@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import apiTaxes from "../../entities/apiTaxes";
+import { Link } from "react-router-dom";
 
 export default function TariffsPage() {
   const [taxes, setTariffs] = useState([]);
@@ -94,7 +95,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       Для взрослых (будни):
@@ -104,7 +105,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       {tariff.Adult} р
@@ -116,7 +117,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       Для детей (будни):
@@ -126,7 +127,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       {tariff.Child} р
@@ -138,7 +139,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       Для взрослых (выходные):
@@ -148,7 +149,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       {tariff.weekendAdult} р
@@ -160,7 +161,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       Для детей (выходные):
@@ -170,7 +171,7 @@ export default function TariffsPage() {
                         width: "50%",
                         wordWrap: "break-word",
                         color: "white",
-                        fontSize: "1.2rem", 
+                        fontSize: "1.2rem",
                       }}
                     >
                       {tariff.weekendChild} р
@@ -244,6 +245,15 @@ export default function TariffsPage() {
         <p style={{ color: "white", fontSize: "1.2rem" }}>
           Все льготы действуют при предоставлении документа на кассе.
         </p>
+      </div>
+      <div>
+        <Link
+          to="/"
+          className="button is-warning"
+          style={{ marginTop: "20px", marginRight: "20%" }}
+        >
+          На главную
+        </Link>
       </div>
     </div>
   );
