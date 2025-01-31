@@ -84,7 +84,7 @@ function App() {
         },
         {
           path: '/edit/animals',
-          element: <AnimalEditPage animals={animals} />
+          element: <AnimalEditPage animals={animals}  setAnimals={setAnimals} />
         },
         {
           path: "/admin",

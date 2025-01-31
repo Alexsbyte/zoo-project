@@ -1,4 +1,6 @@
 'use strict';
+const fs = require('fs').promises
+const path = require('path')
 const {
   Model
 } = require('sequelize');
@@ -21,5 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Animal',
   });
+  Animal.addHook('afterDestroy', async (animal, options) => {
+    return fs.rmdir(path.resolve(__dirname, `../../../public/images/${animal.title}`))
+  });
+
   return Animal;
 };

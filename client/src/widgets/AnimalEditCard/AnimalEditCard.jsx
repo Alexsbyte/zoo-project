@@ -1,14 +1,16 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect } from 'react'
 import { useState , useRef} from 'react';
+import { axiosInstance } from '../../shared/lib/axiosInstance';
 
-export default function AnimalEditCard({animals}) {
-const url = 'http://localhost:3000'
+export default function AnimalEditCard({animals, setAnimals}) {
+
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState(animals.title);
   const [description, setDescription] = useState(animals.description);
   const [photos, setPhotos] = useState(animals.photos);
-  const [file, setFile] = useState(null);
-  const fileInputRef = useRef(null);
+  
+
 
 
 
@@ -20,7 +22,7 @@ const url = 'http://localhost:3000'
   const toggleEdit = () => {
     setIsEditing(!isEditing);
     if (isEditing) {
-      onUpdate({ ...animal, title, description, photos });
+      onUpdate({ ...animals, title, description, photos });
     }
   };
   const handleAddPhoto = (event) => {
@@ -34,6 +36,20 @@ const url = 'http://localhost:3000'
     }
   };
 
+  const onDelete = async (id) =>{
+    try {
+      console.log(id)
+      const {data} = await axiosInstance.delete(`/api/animals/${id}`,)
+      console.log(data)
+      setAnimals((prevState) => 
+        prevState.filter((el)=> el.id !== id)
+      )
+    } catch (error) {
+      console.log(error);
+
+    }
+  
+  }
 
   return (
     
