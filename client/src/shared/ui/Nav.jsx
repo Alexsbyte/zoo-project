@@ -5,6 +5,7 @@ import { setAccessToken } from '../lib/axiosInstance'
 
 export default function Nav({user, setUser, isLoaded}) {
 
+  const [isActive, setIsActive] = useState(false);
   const navigate = useNavigate()
   
   async function handleLogout(e) {
@@ -35,15 +36,21 @@ export default function Nav({user, setUser, isLoaded}) {
           <span className='is-size-3'>Zooryupinsk</span>
         </NavLink>
 
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarDropdown">
+        <button 
+        className={`navbar-burger ${isActive ? "is-active" : ""}`} 
+        aria-label="menu" 
+        aria-expanded={isActive}
+        data-target="navbarDropdown"
+        onClick={() => setIsActive(prev => !prev)}
+        >
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
-        </a>
+        </button>
       </div>
 
-      <div id="navbarDropdown" className="navbar-menu">
+      <div id="navbarDropdown" className={`navbar-menu ${isActive ? "is-active" : ""}`}>
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
