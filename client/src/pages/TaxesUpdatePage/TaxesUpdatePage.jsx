@@ -15,6 +15,7 @@ export default function TaxesUpdatePage({ user }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState("");
+  const [inputError, setInputError] = useState("");
 
   useEffect(() => {
     const fetchTariff = async () => {
@@ -38,14 +39,24 @@ export default function TaxesUpdatePage({ user }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTariff((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+
+    if (value.length <= 4) {
+      setTariff((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+      setInputError("");
+    } else {
+      setInputError("Должно быть не более 4 символов");
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (inputError && inputError !== "Должно быть не более 4 символов") {
+      return;
+    }
 
     try {
       await apiTaxes.updateTax(tariff);
@@ -77,74 +88,48 @@ export default function TaxesUpdatePage({ user }) {
           <div
             style={{
               padding: "20px",
-              backgroundColor: "rgba(129, 253, 141, 0.8)",
+              backgroundColor: "rgba(129,253,141,0.8)",
               borderRadius: "8px",
               color: "white",
               width: "400px",
-              boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.5)",
             }}
           >
             <h1 className="title has-text-centered">Обновить тариф</h1>
             {successMessage && (
               <div style={{ color: "green" }}>{successMessage}</div>
             )}
+            {inputError && <div style={{ color: "red" }}>{inputError}</div>}
 
             <form onSubmit={handleSubmit} className="box">
-              <div className="field">
-                <label className="label">Для взрослых (БУДНИ):</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="number"
-                    name="Adult"
-                    value={tariff.Adult}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Для детей (БУДНИ):</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="number"
-                    name="Child"
-                    value={tariff.Child}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Для взрослых (ВЫХОДНЫЕ):</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="number"
-                    name="weekendAdult"
-                    value={tariff.weekendAdult}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="field">
-                <label className="label">Для детей (ВЫХОДНЫЕ):</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="number"
-                    name="weekendChild"
-                    value={tariff.weekendChild}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
+              {["Adult", "Child", "weekendAdult", "weekendChild"].map(
+                (fieldName) => (
+                  <div className="field" key={fieldName}>
+                    <label className="label">
+                      Для{" "}
+                      {fieldName === "Adult"
+                        ? "взрослых"
+                        : fieldName === "Child"
+                        ? "детей"
+                        : fieldName === "weekendAdult"
+                        ? "взрослых (ВЫХОДНЫЕ)"
+                        : "детей (ВЫХОДНЫЕ)"}
+                      :
+                    </label>
+                    <div className="control">
+                      <input
+                        maxLength="4"
+                        className="input"
+                        type="number"
+                        name={fieldName}
+                        value={tariff[fieldName]}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+                )
+              )}
 
               <button type="submit" className="button is-primary is-fullwidth">
                 Сохранить изменения
