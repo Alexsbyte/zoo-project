@@ -1,14 +1,6 @@
-const jwtConfig = require('../../config/jwtConfig');
-const formatResponse = require('../../utils/formatResponse');
-
 const router = require('express').Router();
+const UserController = require('../../controllers/userController');
 
-router.get('/', (req, res) => {
-  try {
-    res.clearCookie(jwtConfig.refresh.type).json(formatResponse('200', 'logout success'));
-  } catch (error) {
-    res.json(formatResponse('500', 'Server error', null, error.message));
-  }
-});
+router.get('/', UserController.logout);
 
 module.exports = router;
