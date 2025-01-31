@@ -3,7 +3,7 @@ import AnimalCard from '../../widgets/AnimalCard/AnimalCard'
 import AnimalCreatedForm from '../../widgets/AnimalForm/AnimalCreatedForm'
 import AnimalEditCard from '../../widgets/AnimalEditCard/AnimalEditCard'
 
-export default function AnimalEditPage({animals}) {
+export default function AnimalEditPage({animals, setAnimals}) {
     
   return (
 
@@ -14,7 +14,7 @@ export default function AnimalEditPage({animals}) {
                   <div className="columns is-multiline">
                     {animals.map((animal) => (
                       <div key={animal.id} className="column is-half">
-                        <AnimalEditCard animals={animal}  />
+                        <AnimalEditCard animals={animal} setAnimals={setAnimals} />
                       </div>
                     ))}
                   </div>

@@ -36,7 +36,7 @@ console.log(inputs.title,inputs.description);
 
   try {
     const response = await axiosInstance.post('/api/upload',formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data' , 'title': `${inputs.title}`},
     })
   } catch (error) {
     console.error("Error uploading data:", error);

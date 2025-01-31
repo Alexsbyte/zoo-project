@@ -3,13 +3,16 @@
 const multer = require('multer');
 const path = require('path');
 
-
 const storage = multer.diskStorage({
   
   
   destination (req, file, cb) {
+    const dirName = req.headers.title
+  
+    console.log(dirName,"<<<<<<<");
+    
     // здесь cb - колбек, который возвращает значение для св-ва destination
-    cb(null, path.resolve(__dirname,'../../public/images')); // папка куда сохранять файлы
+    cb(null, path.resolve(__dirname,`../../public/images/${dirName}`)); // папка куда сохранять файлы
   },
   filename (req, file, cb) {
     // здесь cb - колбек, который возвращает значение для св-ва filename
