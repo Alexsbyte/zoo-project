@@ -39,10 +39,7 @@ module.exports = class UserController {
 
         res
           .status(200)
-          .cookie(jwtConfig.refresh.type, refreshToken, {
-            maxAge: jwtConfig.refresh.expiresIn,
-            httpOnly: true,
-          })
+          .cookie(jwtConfig.refresh.type, refreshToken)
           .json(formatResponse(200, 'login success', { accessToken, user }));
       } else {
         res.status(400).json(formatResponse(400, 'Нужно заполнить все поля'));
@@ -87,10 +84,7 @@ module.exports = class UserController {
 
         res
           .status(201)
-          .cookie(jwtConfig.refresh.type, refreshToken, {
-            maxAge: jwtConfig.refresh.expiresIn,
-            httpOnly: true,
-          })
+          .cookie(jwtConfig.refresh.type, refreshToken)
           .json(formatResponse(201, 'UserCreated', { accessToken, user }));
       } else {
         res.status(400).json(formatResponse(400, 'Нужно заполнить все поля'));
