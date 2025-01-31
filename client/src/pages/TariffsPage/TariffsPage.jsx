@@ -184,76 +184,70 @@ export default function TariffsPage() {
         ))}
       </div>
 
+      <Link to="/" className="button is-warning" style={{ marginRight: 50 }}>
+        На главную
+      </Link>
       <div
         style={{
-          marginTop: "20px",
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
           padding: "20px",
-          backgroundColor: "rgba(44, 44, 44, 0.8)",
-          borderRadius: "8px",
-          color: "white",
-          textAlign: "center",
-          marginRight: 50,
-          marginTop: 5,
         }}
       >
-        <h2
-          className="title is-5"
-          style={{ color: "white", fontSize: "1.5rem" }}
+        <div
+          style={{
+            flex: "1",
+            marginRight: "10%",
+            backgroundColor: "rgba(44, 44, 44, 0.8)",
+            borderRadius: "8px",
+            padding: "20px",
+            color: "white",
+          }}
         >
-          Информация о билетах
-        </h2>
-        <p style={{ color: "white", fontSize: "1.2rem" }}>
-          детский билет (от 3 до 10 лет)
-        </p>
-        <p style={{ color: "white", fontSize: "1.2rem" }}>
-          до 3-х лет - бесплатно
-        </p>
-        <p style={{ color: "white", fontSize: "1.2rem" }}>
-          При покупке на сайте — скидка 10%
-        </p>
-        <p style={{ color: "white", fontSize: "1.2rem" }}>
-          Билет действует весь день
-        </p>
+          <h3
+            className="title is-6"
+            style={{ fontSize: "1.3rem", color: "white" }}
+          >
+            Льготы:
+          </h3>
+          <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
+            <li>— Илье - вход бесплатно (навсегда)</li>
+            <li>— Участники, ветераны боевых действий - бесплатно</li>
+            <li>— Инвалиды 1, 2 группы - бесплатно</li>
+            <li>— Инвалиды 3 группы - 50% скидка</li>
+            <li>— Многодетные семьи и пенсионеры - 20% скидка</li>
+          </ul>
+          <p>Все льготы действуют при предоставлении документа на кассе.</p>
+        </div>
+        
+        <div
+          style={{
+            flex: "1",
+            marginLeft: "10%",
+            backgroundColor: "rgba(44, 44, 44, 0.8)",
+            borderRadius: "8px",
+            padding: "20px",
+            color: "white",
+          }}
+        >
+          <h2 className="title is-5" style={{ color: "white" }}>
+            Информация о билетах
+          </h2>
 
-        <h3
-          className="title is-6"
-          style={{ color: "white", fontSize: "1.3rem" }}
-        >
-          Льготы:
-        </h3>
-        <ul style={{ listStyleType: "none", paddingLeft: "0" }}>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Илье - вход бесплатно (навсегда)
-          </li>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Кириллу - вход бесплатно (навсегда)
-          </li>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Инвалиды 1, 2 группы - бесплатно
-          </li>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Инвалиды 3 группы - 50% скидка
-          </li>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Участники, ветераны боевых действий - бесплатно
-          </li>
-          <li style={{ color: "white", fontSize: "1.2rem" }}>
-            — Многодетные семьи и пенсионеры - 20% скидка
-          </li>
-        </ul>
+          <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+            <li>Детский билет (от 3 до 10 лет)</li>
+            <li>До 3-х лет - бесплатно</li>
+            <li>Билет действует весь день</li>
+          </ul>
 
-        <p style={{ color: "white", fontSize: "1.2rem" }}>
-          Все льготы действуют при предоставлении документа на кассе.
-        </p>
-      </div>
-      <div>
-        <Link
-          to="/"
-          className="button is-warning"
-          style={{ marginTop: "20px", marginRight: "20%" }}
-        >
-          На главную
-        </Link>
+          <p style={{ marginTop: "15px", fontWeight: "bold" }}>Важно:</p>
+
+          <p style={{ marginTop: "15px" }}>
+            Если у вас есть вопросы или требуется помощь, не стесняйтесь
+            обращаться к нашим сотрудникам.
+          </p>
+        </div>
       </div>
     </div>
   );
